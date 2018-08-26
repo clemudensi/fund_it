@@ -198,7 +198,7 @@ material-kit-pro
         │   ├── ComponentsPage.jsx
         │   └── Sections
         │       ├── SectionBasics.jsx
-        │       ├── SectionCards.jsx
+        │       ├── HomepageCampaign.jsx
         │       ├── SectionCarousel.jsx
         │       ├── SectionContentAreas.jsx
         │       ├── SectionFooter.jsx
@@ -226,7 +226,7 @@ material-kit-pro
         ├── PresentationPage
         │   ├── PresentationPage.jsx
         │   └── Sections
-        │       ├── SectionCards.jsx
+        │       ├── HomepageCampaign.jsx
         │       ├── SectionComponents.jsx
         │       ├── SectionContent.jsx
         │       ├── SectionDescription.jsx
@@ -243,7 +243,7 @@ material-kit-pro
         │   └── ProductPage.jsx
         ├── ProfilePage
         │   └── ProfilePage.jsx
-        ├── SectionsPage
+        ├── HomePage
         │   ├── Sections
         │   │   ├── SectionBlogs.jsx
         │   │   ├── SectionContacts.jsx
@@ -252,8 +252,7 @@ material-kit-pro
         │   │   ├── SectionProjects.jsx
         │   │   ├── SectionTeams.jsx
         │   │   └── SectionTestimonials.jsx
-        │   └── SectionsPage.jsx
-        ├── ShoppingCartPage
+        │   └── HomePage.jsx     ├── ShoppingCartPage
         │   └── ShoppingCartPage.jsx
         └── SignupPage
             └── SignupPage.jsx

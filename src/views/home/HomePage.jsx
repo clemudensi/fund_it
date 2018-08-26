@@ -5,12 +5,12 @@ import withStyles from "@material-ui/core/styles/withStyles";
 // sections of this Page
 import Banner from "./Sections/Home";
 import WhyUs from "./Sections/WhyUs";
-import Campaign from "./Sections/SectionCards";
+import Campaign from "./Sections/HomepageCampaign";
 import AboutUs from "./Sections/AboutUs";
 
 import sectionsPageStyle from "assets/jss/material-kit-pro-react/views/sectionsPageStyle";
 
-class SectionsPage extends React.Component {
+class HomePage extends React.Component {
   componentDidMount() {
     var href = window.location.href.substring(
       window.location.href.lastIndexOf("#") + 1
@@ -183,4 +183,4 @@ class SectionsPage extends React.Component {
   }
 }
 
-export default withStyles(sectionsPageStyle)(SectionsPage);
+export default withStyles(sectionsPageStyle)(HomePage);

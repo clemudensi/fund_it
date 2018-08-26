@@ -24,7 +24,7 @@ function SectionHeaders({ ...props }) {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 3000,
+    speed: 12000,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true
@@ -46,10 +46,8 @@ function SectionHeaders({ ...props }) {
                   <GridItem xs={12} sm={6} md={6}>
                     <h1 className={classes.title}>FundIt Campaign</h1>
                     <h4>
-                      Dolce & Gabbana is a luxury Italian fashion house founded
-                      in 1985 in Legnano by Italian designers Domenico Dolce and
-                      Stefano Gabbana. The two met in Milan in 1980 and designed
-                      for the same fashion house.
+                      Alone we can do so little, together we can do so much
+                      -Helen Keller
                     </h4>
                     <br />
                     <Button color="info" round size="lg">
@@ -81,10 +79,7 @@ function SectionHeaders({ ...props }) {
                   >
                     <h1 className={classes.title}>Build Your Dreams</h1>
                     <h4>
-                      Dolce & Gabbana is a luxury Italian fashion house founded
-                      in 1985 in Legnano by Italian designers Domenico Dolce and
-                      Stefano Gabbana. The two met in Milan in 1980 and designed
-                      for the same fashion house.
+                      We are a team, watch us build an empire together
                     </h4>
                     <br />
                     <h6>Connect with us on:</h6>
@@ -118,10 +113,7 @@ function SectionHeaders({ ...props }) {
                   >
                     <h1 className={classes.title}>Achieve with a Strong Community</h1>
                     <h4>
-                      There's no doubt that Tesla is delighted with the
-                      interest, but the data also raises a few questions. How
-                      long will it take for Tesla to fulfill all those extra
-                      orders?
+                      If you want to achieve your goals, help others achieve their goals.
                     </h4>
                   </GridItem>
                 </GridContainer>

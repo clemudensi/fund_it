@@ -29,7 +29,7 @@ class DefaultFooter extends React.Component {
                 <List className={classes.list}>
                   <ListItem className={classes.inlineBlock}>
                     <a
-                      href="http://blog.creative-tim.com/"
+                      href="/"
                       className={classes.block}
                     >
                       Home
@@ -37,7 +37,7 @@ class DefaultFooter extends React.Component {
                   </ListItem>
                   <ListItem className={classes.inlineBlock}>
                     <a
-                      href="#pablito"
+                      href="/faq"
                       onClick={e => e.preventDefault()}
                       className={classes.block}
                     >
@@ -46,7 +46,7 @@ class DefaultFooter extends React.Component {
                   </ListItem>
                   <ListItem className={classes.inlineBlock}>
                     <a
-                      href="#pablito"
+                      href="/policy"
                       onClick={e => e.preventDefault()}
                       className={classes.block}
                     >
@@ -55,7 +55,7 @@ class DefaultFooter extends React.Component {
                   </ListItem>
                   <ListItem className={classes.inlineBlock}>
                     <a
-                      href="#"
+                      href="/contact"
                       className={classes.block}
                     >
                       Contact us
@@ -66,7 +66,7 @@ class DefaultFooter extends React.Component {
               <div className={classes.right}>
                 Copyright &copy; {1900 + new Date().getYear()}{" "}
                 <a
-                  href="https://www.funtit.com"
+                  href="https://www.fundit.com"
                   className={classes.aClasses}
                 >
                   FundIt

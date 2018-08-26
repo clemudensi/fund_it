@@ -7,12 +7,16 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import _ from 'lodash';
 // @material-ui/icons
 import Close from "@material-ui/icons/Close";
 import Mail from "@material-ui/icons/Mail";
 import LockOutline from "@material-ui/icons/LockOutline";
 import {NavLink} from "react-router-dom";
 // core components
+import  fetchUser from '../actions/users'
 import Button from "components/CustomButtons/Button.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
@@ -20,9 +24,9 @@ import CardBody from "components/Card/CardBody.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 
 import javascriptStyles from "assets/jss/material-kit-pro-react/views/componentsSections/javascriptStyles";
-import LocalAuthService from './components/LocalAuthService';
-import FacebookAuth from "./loginFacebook/FacebookAuth";
-import DashboardProps from 'routes/dashboard'
+// import LocalAuthService from './components/LocalAuthService';
+// import FacebookAuth from "./loginFacebook/FacebookAuth";
+// import DashboardProps from 'routes/dashboard'
 
 
 function Transition(props) {
@@ -68,6 +72,10 @@ class Login extends React.Component {
     this.setState({id: res.data._id})
   };
 
+  componentWillMount(){
+    this.props.fetchUser();
+  }
+
   render() {
     const { email, password, message } = this.state;
     const { classes } = this.props;
@@ -101,6 +109,7 @@ class Login extends React.Component {
             >
               <CardHeader
                 plain
+                color="primary"
                 className={`${classes.textCenter} ${classes.cardLoginHeader}`}
               >
                 <Button
@@ -124,6 +133,9 @@ class Login extends React.Component {
               className={classes.modalBody}
             >
               <form onSubmit={this.handleFormSubmit}>
+                <p className={`${classes.description} ${classes.textCenter}`}>
+                  Or Be Classical
+                </p>
                 <CardBody className={classes.cardLoginBody}>
                   <CustomInput
                     id="login-modal-email"
@@ -182,4 +194,14 @@ class Login extends React.Component {
   }
 }
 
-export default withStyles(javascriptStyles)(Login);
+function mapStateToProps(state) {
+  return {
+    user_login: state.user_login
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({fetchUser}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(javascriptStyles)(Login));

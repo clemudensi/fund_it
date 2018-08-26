@@ -84,17 +84,15 @@ class FundedCampaign extends React.Component {
               md={8}
               className={`${classes.mrAuto} ${classes.mlAuto}`}
             >
-              <h4>
-                <small>Simple With Actions</small>
-              </h4>
               <Table
                 tableHead={[
                   "#",
                   "Name",
-                  "Job Position",
-                  "Since",
-                  "Salary",
-                  "Actions"
+                  "Campaign Name",
+                  "Date",
+                  "Amount",
+                  "% Equity",
+                  "Status"
                 ]}
                 tableData={[
                   [
@@ -103,16 +101,20 @@ class FundedCampaign extends React.Component {
                     "Develop",
                     "2013",
                     "€ 99,225",
-                    fillButtons
+                    5,
+                    "Ongoing"
+                    // fillButtons
                   ],
-                  ["2", "John Doe", "Design", "2012", "€ 89,241", roundButtons],
+                  ["2", "John Doe", "Design", "2012", "€ 89,241"],
                   [
                     "3",
                     "Alex Mike",
                     "Design",
                     "2010",
                     "€ 92,144",
-                    simpleButtons
+                    2,
+                    "Ended"
+                    // simpleButtons
                   ],
                   [
                     "4",
@@ -120,7 +122,9 @@ class FundedCampaign extends React.Component {
                     "Marketing",
                     "2013",
                     "€ 49,990",
-                    roundButtons
+                    3,
+                    "Ongoing"
+                    // roundButtons
                   ],
                   [
                     "5",
@@ -128,7 +132,7 @@ class FundedCampaign extends React.Component {
                     "Communication",
                     "2015",
                     "€ 69,201",
-                    fillButtons
+                    // fillButtons
                   ]
                 ]}
                 customCellClasses={[

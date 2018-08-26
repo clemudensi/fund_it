@@ -7,21 +7,17 @@ import ImageGallery from "react-image-gallery";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 // core components
-import Parallax from "components/Parallax/Parallax.jsx";
-import GridContainer from "components/Grid/GridContainer.jsx";
-import GridItem from "components/Grid/GridItem.jsx";
-import Accordion from "components/Accordion/Accordion.jsx";
-import Campaign from "./Campaign";
-import Card from 'views/ComponentsPage/Sections/SectionCards'
+import Parallax from "components/Parallax/Parallax";
+import GridContainer from "components/Grid/GridContainer";
+import GridItem from "components/Grid/GridItem";
+import Accordion from "components/Accordion/Accordion";
+import Campaign from "views/home/Sections/HomepageCampaign";
+import Button from "components/CustomButtons/Button.jsx";
 
-import productStyle from "assets/jss/material-kit-pro-react/views/productStyle.jsx";
+import Image1 from 'assets/img/examples/card-blog2.jpg';
 
-// images
-import product1 from "assets/img/examples/product1.jpg";
-import product2 from "assets/img/examples/product2.jpg";
-import product3 from "assets/img/examples/product3.jpg";
-import product4 from "assets/img/examples/product4.jpg";
-
+import productStyle from "assets/jss/material-kit-pro-react/views/productStyle";
+import AllCampaignInfo from "./AllCampaignInfo";
 
 class ProductPage extends React.Component {
   constructor(props) {
@@ -31,104 +27,84 @@ class ProductPage extends React.Component {
       sizeSelect: "0"
     };
   }
-  handleSelect = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+
   componentDidMount() {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
   }
   render() {
     const { classes } = this.props;
-    const images = [
-      {
-        original: product3,
-        thumbnail: product3
-      },
-      {
-        original: product4,
-        thumbnail: product4
-      },
-      {
-        original: product1,
-        thumbnail: product1
-      },
-      {
-        original: product2,
-        thumbnail: product2
-      }
-    ];
+    const floatRight = {float: "right"};
     return (
       <div className={classes.productPage}>
         <Parallax
-          image={require("assets/img/bg6.jpg")}
-          filter="rose"
+          image={require("assets/img/TBA.jpg")}
+          // filter="info"
           className={classes.pageHeader}
         >
           <div className={classes.container}>
           </div>
         </Parallax>
-        <div className={classNames(classes.section, classes.sectionGray)}>
+        <div className={classNames(classes.section, classes.main)}>
           <div className={classes.container}>
             <div className={classNames(classes.main, classes.mainRaised)}>
               <GridContainer>
-                <GridItem md={6} sm={6}>
-                  <ImageGallery
-                    showFullscreenButton={false}
-                    showPlayButton={false}
-                    startIndex={3}
-                    items={images}
-                  />
+                <GridItem md={7} sm={7}>
+                  {/*<ImageGallery*/}
+                    {/*showFullscreenButton={false}*/}
+                    {/*showPlayButton={false}*/}
+                    {/*startIndex={3}*/}
+                    {/*// items={images}*/}
+                  {/*/>*/}
+                  <img src={Image1} alt="Campaign Image" style={{width: 570, height: 350}} />
+                  <AllCampaignInfo/>
                 </GridItem>
-                <GridItem md={6} sm={6}>
-                  <h2 className={classes.title}>Becky Silk Blazer</h2>
-                  <h3 className={classes.mainPrice}>$335</h3>
+                <GridItem md={5} sm={5}>
+                  <h2 className={classes.title}>Ultimate Fund raiser</h2>
+                  <h3 className={classes.mainPrice}>Amount to be raise: <b>$5000</b></h3>
                   <Accordion
-                    active={0}
-                    activeColor="rose"
+                    // active={0}
+                    activeColor="info"
                     collapses={[
                       {
-                        title: "Description",
+                        title: "Funding Type 1",
                         content: (
-                          <p>
-                            Eres' daring 'Grigri Fortune' swimsuit has the fit
-                            and coverage of a bikini in a one-piece silhouette.
-                            This fuchsia style is crafted from the label's
-                            sculpting peau douce fabric and has flattering
-                            cutouts through the torso and back. Wear yours with
-                            mirrored sunglasses on vacation.
-                          </p>
+                          <div>
+                            <p>
+                              Funds of $500 from 10 individuals
+                            </p>
+                            <Button color="info" round onClick={this.onClickCancel} style={floatRight}>
+                              fund
+                            </Button>
+                          </div>
                         )
                       },
                       {
-                        title: "Designer Information",
+                        title: "Funding Type 2",
                         content: (
-                          <p>
-                            An infusion of West Coast cool and New York
-                            attitude, Rebecca Minkoff is synonymous with It girl
-                            style. Minkoff burst on the fashion scene with her
-                            best-selling 'Morning After Bag' and later expanded
-                            her offering with the Rebecca Minkoff Collection - a
-                            range of luxe city staples with a \"downtown
-                            romantic\" theme.
-                          </p>
+                         <div>
+                           <p>
+                             FMCG items
+                           </p>
+                           <Button color="info" round onClick={this.onClickCancel} style={floatRight}>
+                             fund
+                           </Button>
+                         </div>
                         )
                       },
                       {
-                        title: "Details and Care",
+                        title: "Funding Type 3",
                         content: (
-                          <ul>
-                            <li>
-                              Storm and midnight-blue stretch cotton-blend
-                            </li>
-                            <li>
-                              Notch lapels, functioning buttoned cuffs, two
-                              front flap pockets, single vent, internal pocket
-                            </li>
-                            <li>Two button fastening</li>
-                            <li>84% cotton, 14% nylon, 2% elastane</li>
-                            <li>Dry clean</li>
-                          </ul>
+                          <div>
+                            <ul>
+                              <li>
+                                A choice location in Ikeja
+                              </li>
+                            </ul>
+                            <Button color="info" round onClick={this.onClickCancel} style={floatRight}>
+                              fund
+                            </Button>
+                          </div>
                         )
                       }
                     ]}
@@ -139,11 +115,7 @@ class ProductPage extends React.Component {
             <div className={classNames(classes.features, classes.textCenter)}>
             </div>
             <div className={classes.relatedProducts}>
-              <h3 className={classNames(classes.title, classes.textCenter)}>
-                You may also be interested in:
-              </h3>
               <Campaign/>
-              <Card/>
             </div>
           </div>
         </div>

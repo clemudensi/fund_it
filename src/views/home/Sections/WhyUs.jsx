@@ -3,8 +3,8 @@ import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 import GroupWork from "@material-ui/icons/GroupWork";
-import Airplay from "@material-ui/icons/Airplay";
-import LocationOn from "@material-ui/icons/LocationOn";
+import Business from "@material-ui/icons/Business";
+import Launch from "@material-ui/icons/Launch";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
@@ -45,13 +45,10 @@ function WhyUs({ ...props }) {
                 description={
                   <span>
                     <p>
-                      The moment you use Material Kit, you know you’ve never
-                      felt anything like it. With a single use, this powerfull
-                      UI Kit lets you do more than ever before.
+                      A perfect place where users and businesses meet, with
+                      a common goal to bring  brilliant projects to life.
                     </p>
-                    <a href="#pablo" onClick={e => e.preventDefault()}>
-                      Find more...
-                    </a>
+
                   </span>
                 }
                 iconColor="info"
@@ -59,18 +56,14 @@ function WhyUs({ ...props }) {
             </GridItem>
             <GridItem xs={12} sm={4} md={4}>
               <InfoArea
-                icon={Airplay}
-                title="Airplay"
+                icon={Business}
+                title="Build"
                 description={
                   <span>
                     <p>
-                      Divide details about your product or agency work into
-                      parts. Write a few lines about each one. A paragraph
-                      describing a feature will be enough.
+                      We provide the perfect opportunity to transform your ideas
+                      into a real business with unlimited potential for growth.
                     </p>
-                    <a href="#pablo" onClick={e => e.preventDefault()}>
-                      Find more...
-                    </a>
                   </span>
                 }
                 iconColor="danger"
@@ -78,18 +71,14 @@ function WhyUs({ ...props }) {
             </GridItem>
             <GridItem xs={12} sm={4} md={4}>
               <InfoArea
-                icon={LocationOn}
-                title="Location Integrated"
+                icon={Launch}
+                title="Dynamic "
                 description={
                   <span>
                     <p>
-                      Divide details about your product or agency work into
-                      parts. Write a few lines about each one. A paragraph
-                      describing a feature will be enough.
+                      In an ever changing and dynamic business landscape,
+                      higher standards is a must, we make that easy for you.
                     </p>
-                    <a href="#pablo" onClick={e => e.preventDefault()}>
-                      Find more...
-                    </a>
                   </span>
                 }
                 iconColor="success"

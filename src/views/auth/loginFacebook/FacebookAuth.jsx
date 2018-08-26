@@ -63,8 +63,11 @@ class FacebookLogin extends Component{
     const { classes } = this.props;
     return(
       <div>
-        <Button justIcon link className={classes.socialLineButton} onClick={ () => this.facebookLogin() }>
+        <Button className={classes.socialLineButton}
+                onClick={ () => this.facebookLogin() }
+                size="lg" color="instagram" round>
           <i className="fab fa-facebook" />
+          <b>FaceBook Sign in</b>
         </Button>
       </div>
 

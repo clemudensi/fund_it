@@ -5,7 +5,7 @@ import Person from "@material-ui/icons/Person";
 
 // core components/views
 import DashboardPage from "views/dashboard/Dashboard.jsx";
-import UserProfile from "views/dashboard/UserProfile/UserProfile.jsx";
+import UserProfile from "containers/UserProfile";
 import UserCampaign from "views/dashboard/UserCampaign/UserCampaignSections";
 
 const spliLink = window.location.pathname.split('/')[2];
@@ -13,10 +13,6 @@ console.log(spliLink, 'split link', this.props);
 
 
 class dashboardRoutes extends React.Component{
-  allProps(){
-    console.log(this.props.match.params.id)
-  }
-
   routes(){
     const userId = window.location.pathname.split('/')[2];
     return(
@@ -36,7 +32,7 @@ class dashboardRoutes extends React.Component{
         component: UserProfile
       },
       {
-        path: `/user/campaigns`,
+        path: `/campaigns`,
         sidebarName: "User Campaign",
         navbarName: "UserCampaign",
         icon: Person,

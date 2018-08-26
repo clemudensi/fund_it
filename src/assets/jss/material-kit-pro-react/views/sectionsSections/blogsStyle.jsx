@@ -28,6 +28,9 @@ const blogsSection = {
       lineHeight: "0"
     }
   },
+  floatRight: {
+    float: "right"
+  },
   description1: {
     ...description,
     lineHeight: "1.313rem"
@@ -39,7 +42,7 @@ const blogsSection = {
     }
   },
   card: {
-    marginBottom: "80px"
+    marginBottom: "10px"
   },
   card4: {
     marginBottom: "60px",

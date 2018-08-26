@@ -4,6 +4,7 @@ import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 // @material-ui/icons
 import Favorite from "@material-ui/icons/Favorite";
+import Timelapse from '@material-ui/icons/Timelapse'
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
@@ -19,8 +20,14 @@ import styles from "assets/jss/material-kit-pro-react/views/componentsSections/s
 import cardBlog2 from "assets/img/examples/card-blog2.jpg";
 
 import blog8 from "assets/img/examples/blog8.jpg";
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
+import fetchUserCampaign from "../../../actions/userCampaigns";
+import Link from "react-router-dom/es/Link";
+import _ from 'lodash';
 
-class SectionCards extends React.Component {
+
+class Campaigns extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,6 +37,10 @@ class SectionCards extends React.Component {
       follow: true,
       campaign_status: true
     };
+  }
+
+  componentDidMount(){
+    this.props.fetchUserCampaign();
   }
 
   handleFollow = () => {
@@ -43,74 +54,78 @@ class SectionCards extends React.Component {
   };
 
   onClickFollow = () => {
-    this.setState({follow: !this.state.follow});
+    this.setState((prevState) =>
+      ({ follow: !prevState.follow })
+    );
+  };
+
+  renderCampaign(){
+    const size = 3;
+    const { classes, user_campaign } = this.props;
+    return(
+      _.map(user_campaign.slice(0, size), (campaign, key) => <GridItem md={4} sm={4} className={`${classes.mlAuto} ${classes.mrAuto} ${
+        classes.textCenter
+        }`} key={key}>
+        <Card blog>
+          <CardHeader image>
+            <img src={campaign.campaign_image} alt="Campaign Image" />
+            <div
+              className={classes.coloredShadow}
+              style={{
+                backgroundImage: `url(${cardBlog2})`,
+                opacity: "1"
+              }}
+            />
+          </CardHeader>
+          <CardBody>
+            <Success>
+              <h6 className={classes.cardCategory}>{campaign.campaign_type}</h6>
+            </Success>
+            <h4 className={classes.cardTitle}>
+              <Link to='/#'>
+                {campaign.campaign_title}
+              </Link>
+            </h4>
+            <p className={classes.cardDescription}>
+              {campaign.campaign_description}
+            </p>
+          </CardBody>
+          <CardFooter>
+            <div className={classes.author}>
+              <span><h4>${campaign.campaign_amount}</h4></span>
+            </div>
+            <div className={`${classes.stats} ${classes.mlAuto}`}>
+              <Favorite color={this.handleFollow()} onClick={this.onClickFollow}/>
+              345
+            </div>
+          </CardFooter>
+          <div className="container-fluid">
+            <CustomLinearProgress
+              variant="determinate"
+              color={this.campaignStatus()}
+              value={100}
+              style={{ width: "92%", display: "inline-block" }}
+            />
+          </div>
+        </Card>
+      </GridItem>)
+    )
   }
 
   render() {
+    console.log(this.props.user_campaign, 'HOme Page campaign')
     const { classes, ...rest } = this.props;
     return (
-      <div {...rest} className="cd-section">
+      // _.map(user_campaign, (campaign, key) =>
+        <div className="cd-section" {...rest}>
         <div className={classes.container}>
           <div>
             {/* BLOG CARDS START */}
             <div className={classes.features2}>
               <div className={classes.container}>
-                <h2 className={classes.title} align="center">Why Choose Us!</h2>
+                <h2 className={classes.title} align="center">Campaign Explore</h2>
                 <GridContainer>
-                  <GridItem md={4} sm={4} className={`${classes.mlAuto} ${classes.mrAuto} ${
-                    classes.textCenter
-                    }`}>
-                    <Card blog>
-                      <CardHeader image>
-                        <a href="#pablo" onClick={e => e.preventDefault()}>
-                          <img src={blog8} alt="..." />
-                        </a>
-                        <div
-                          className={classes.coloredShadow}
-                          style={{
-                            backgroundImage: `url(${cardBlog2})`,
-                            opacity: "1"
-                          }}
-                        />
-                      </CardHeader>
-                      <CardBody>
-                        <Success>
-                          <h6 className={classes.cardCategory}>Legal</h6>
-                        </Success>
-                        <h4 className={classes.cardTitle}>
-                          <a href="#pablo" onClick={e => e.preventDefault()}>
-                            5 Common Legal Mistakes That Can Trip-Up Your
-                            Startup
-                          </a>
-                        </h4>
-                        <p className={classes.cardDescription}>
-                          Don't be scared of the truth because we need to
-                          restart the human foundation in truth And I love you
-                          like Kanye loves Kanye I love Rick Owens’ bed design
-                          but the back is...
-                        </p>
-                      </CardBody>
-                      <CardFooter>
-                        <div className={classes.author}>
-                          <a href="#pablo" onClick={e => e.preventDefault()}>
-                            <span><h4>$1,459</h4></span>
-                          </a>
-                        </div>
-                        <div className={`${classes.stats} ${classes.mlAuto}`}>
-                          <Favorite color={this.handleFollow()} onClick={this.onClickFollow}/>
-                          345
-                        </div>
-                      </CardFooter>
-                      <div className="container-fluid">
-                        <CustomLinearProgress
-                          variant="determinate"
-                          color={this.campaignStatus()}
-                          value={100}
-                          style={{ width: "92%", display: "inline-block" }}
-                        />
-                      </div>
-                    </Card>
-                  </GridItem>
+                  {/*{this.renderCampaign()}*/}
                   <GridItem md={4} sm={4}>
                     <Card blog>
                       <CardHeader image>
@@ -131,8 +146,7 @@ class SectionCards extends React.Component {
                         </Success>
                         <h4 className={classes.cardTitle}>
                           <a href="#pablo" onClick={e => e.preventDefault()}>
-                            5 Common Legal Mistakes That Can Trip-Up Your
-                            Startup
+                            Best Campaign to fund on the Planet!
                           </a>
                         </h4>
                         <p className={classes.cardDescription}>
@@ -163,6 +177,7 @@ class SectionCards extends React.Component {
                       </div>
                     </Card>
                   </GridItem>
+
                   <GridItem md={4} sm={4}>
                     <Card blog>
                       <CardHeader image>
@@ -183,8 +198,60 @@ class SectionCards extends React.Component {
                         </Success>
                         <h4 className={classes.cardTitle}>
                           <a href="#pablo" onClick={e => e.preventDefault()}>
-                            5 Common Legal Mistakes That Can Trip-Up Your
-                            Startup
+                            Best Campaign to fund on the Planet!
+                          </a>
+                        </h4>
+                        <p className={classes.cardDescription}>
+                          Don't be scared of the truth because we need to
+                          restart the human foundation in truth And I love you
+                          like Kanye loves Kanye I love Rick Owens’ bed design
+                          but the back is...
+                        </p>
+                      </CardBody>
+                      <CardFooter>
+                        <div className={classes.author}>
+                          <a href="#pablo" onClick={e => e.preventDefault()}>
+                            <span><h4>$1,459</h4></span>
+                          </a>
+                        </div>
+                        <div className={`${classes.stats} ${classes.mlAuto}`}>
+                          <Favorite color="error" />
+                          345 days left
+                          <Timelapse/>
+                        </div>
+                      </CardFooter>
+                      <div className="container-fluid">
+                        <CustomLinearProgress
+                          variant="determinate"
+                          color={this.campaignStatus()}
+                          value={100}
+                          style={{ width: "65%", display: "inline-block" }}
+                        />
+                      </div>
+                    </Card>
+                  </GridItem>
+
+                  <GridItem md={4} sm={4}>
+                    <Card blog>
+                      <CardHeader image>
+                        <a href="#pablo" onClick={e => e.preventDefault()}>
+                          <img src={blog8} alt="..." />
+                        </a>
+                        <div
+                          className={classes.coloredShadow}
+                          style={{
+                            backgroundImage: `url(${cardBlog2})`,
+                            opacity: "1"
+                          }}
+                        />
+                      </CardHeader>
+                      <CardBody>
+                        <Success>
+                          <h6 className={classes.cardCategory}>Legal</h6>
+                        </Success>
+                        <h4 className={classes.cardTitle}>
+                          <a href="#pablo" onClick={e => e.preventDefault()}>
+                            User Campaign for promo Purpose only
                           </a>
                         </h4>
                         <p className={classes.cardDescription}>
@@ -226,4 +293,14 @@ class SectionCards extends React.Component {
   }
 }
 
-export default withStyles(styles)(SectionCards);
+function mapStateToProps(state) {
+  return {
+    user_campaign: state.user_campaign
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({fetchUserCampaign}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Campaigns));

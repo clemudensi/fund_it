@@ -17,18 +17,36 @@ import dashboardStyle from "assets/jss/material-dashboard-react/layouts/dashboar
 
 import image from "assets/img/sidebar-2.jpg";
 import logo from "assets/img/reactlogo.png";
+import {bindActionCreators} from "redux";
+import fetchUser from "../../actions/users";
+import connect from "react-redux/es/connect/connect";
 
 console.log(DashboardRoutes, 'Dashboard Routes')
+class SwitchRoutes extends React.Component {
+  constructor(props){
+    super(props)
+  }
 
-const switchRoutes = (
-  <Switch>
-    {DashboardRoutes.map((prop, key) => {
-      if (prop.redirect)
-        return <Redirect from={prop.path} to={prop.to} key={key} {...prop}/>;
-      return <Route path={prop.path} component={prop.component} key={key} {...prop} />;
-    })}
-  </Switch>
-);
+  componentWillMount(){
+    this.props.fetchUser();
+  }
+
+  routes (){
+
+    return(
+      <Switch>
+        {DashboardRoutes.map((prop, key) => {
+          if (prop.redirect)
+            return <Redirect from={prop.path} to={prop.to} key={key} {...prop}/>;
+          return <Route path={prop.path} component={prop.component} key={key} {...prop} />;
+        })}
+      </Switch>
+    )
+  }
+}
+
+const routeSwitch = new SwitchRoutes();
+const switchRoutes = routeSwitch.routes();
 
 class DashBoardPanel extends React.Component {
   constructor(props){
@@ -58,7 +76,6 @@ class DashBoardPanel extends React.Component {
     }
   }
   render() {
-    console.log(this.props.match.params.id, 'Match params')
     const { classes, ...rest } = this.props;
     return (
       <div className={classes.wrapper}>
@@ -88,8 +105,18 @@ class DashBoardPanel extends React.Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    user_login: state.user_login
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({fetchUser}, dispatch)
+}
+
 DashBoardPanel.propTypes = {
   classes: PropTypes.object.isRequired
 };
-
-export default withStyles(dashboardStyle)(DashBoardPanel);
+connect(mapStateToProps, mapDispatchToProps)(SwitchRoutes);
+export default (withStyles(dashboardStyle)(DashBoardPanel));

@@ -13,8 +13,15 @@ const contentAreas = {
     height: "50px",
     display: "block"
   },
+  space20: {
+    height: "20px",
+    display: "block"
+  },
   padding0: {
     padding: "0 !important"
+  },
+  padding1: {
+    paddingBottom: "40px"
   },
   imgContainer: {
     width: "120px",
@@ -71,6 +78,9 @@ const contentAreas = {
   },
   floatRight: {
     float: "right"
+  },
+  floatLeft: {
+    float: "left"
   },
   justifyContentCenter: {
     WebkitBoxPack: "center !important",

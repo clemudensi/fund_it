@@ -93,12 +93,10 @@ class SectionCards extends React.Component {
                       </CardBody>
                       <CardFooter>
                         <div className={classes.author}>
-                          <a href="#pablo" onClick={e => e.preventDefault()}>
-                            <span><h4>$1,459</h4></span>
-                          </a>
+                          <span><h4>$1,459</h4></span>
                         </div>
                         <div className={`${classes.stats} ${classes.mlAuto}`}>
-                          <Favorite color="#2febc2" />
+                          <Favorite color="error" />
                           345
                         </div>
                       </CardFooter>
@@ -115,9 +113,7 @@ class SectionCards extends React.Component {
                   <GridItem md={4} sm={4}>
                     <Card blog>
                       <CardHeader image>
-                        <a href="#pablo" onClick={e => e.preventDefault()}>
-                          <img src={blog8} alt="..." />
-                        </a>
+                        <img src={blog8} alt="..." />
                         <div
                           className={classes.coloredShadow}
                           style={{
@@ -145,9 +141,7 @@ class SectionCards extends React.Component {
                       </CardBody>
                       <CardFooter>
                         <div className={classes.author}>
-                          <a href="#pablo" onClick={e => e.preventDefault()}>
-                            <span><h4>$1,459</h4></span>
-                          </a>
+                          <span><h4>$1,459</h4></span>
                         </div>
                         <div className={`${classes.stats} ${classes.mlAuto}`}>
                           <Favorite color="error" />

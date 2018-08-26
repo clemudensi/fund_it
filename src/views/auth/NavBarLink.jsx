@@ -22,7 +22,6 @@ import Button from "components/CustomButtons/Button";
 import profileImage from "assets/img/faces/avatar.jpg";
 
 function HeaderLinks({ ...props }) {
-  console.log(history, 'NavUser Params in links')
   const easeInOutQuad = (t, b, c, d) => {
     t /= d / 2;
     if (t < 1) return c / 2 * t * t + b;
