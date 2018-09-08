@@ -75,14 +75,14 @@ class FundedCampaign extends React.Component {
     });
     return (
       <div {...rest} className="cd-section" id="contentAreas">
-        <h2>Funded Campaign</h2>
+        {/*<h2>Funded Campaign</h2>*/}
         <div id="tables">
           <GridContainer>
             <GridItem
               xs={12}
               sm={10}
               md={8}
-              className={`${classes.mrAuto} ${classes.mlAuto}`}
+              // className={`${classes.mrAuto} ${classes.mlAuto}`}
             >
               <Table
                 tableHead={[

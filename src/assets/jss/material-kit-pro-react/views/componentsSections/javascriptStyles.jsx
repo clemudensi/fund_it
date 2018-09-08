@@ -49,6 +49,9 @@ const javascriptStyles = theme => ({
   textCenter: {
     textAlign: "center"
   },
+  cardPadding: {
+    paddingBottom: "30px"
+  },
   cardTitleWhite: {
     ...cardTitle,
     color: "#FFFFFF !important",

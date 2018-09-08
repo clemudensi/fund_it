@@ -239,8 +239,8 @@ material-kit-pro
         │   ├── PricingPage.jsx
         │   └── Sections
         │       ├── WhyUs.jsx       └── SectionPricing.jsx
-        ├── ProductPage
-        │   └── ProductPage.jsx
+        ├── ViewCampaign
+        │   └── ViewCampaign.jsxx
         ├── ProfilePage
         │   └── ProfilePage.jsx
         ├── HomePage

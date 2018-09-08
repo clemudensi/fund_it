@@ -14,13 +14,9 @@ import blogsStyle from "assets/jss/material-kit-pro-react/views/sectionsSections
 import cardBlog4 from "assets/img/examples/card-blog4.jpg";
 
 class UserCampaign extends React.Component{
-  constructor(props){
-    super(props);
-  }
 
   render(){
     const { classes, ...rest } = this.props;
-    {/*  start*/}
     return (
       <div className="cd-section" {...rest}>
         <div >

@@ -3,7 +3,8 @@ import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import _ from 'lodash';
+import map from 'lodash/map';
+import find from 'lodash/find'
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
@@ -31,8 +32,7 @@ class UserCampaigns extends React.Component{
     this.props.fetchUserCampaign();
   }
 
-  onClickEdit = (key) => {
-    console.log(key, 'edit key')
+  onClickEdit = () => {
     this.setState({isEditing: true});
   };
 
@@ -40,19 +40,28 @@ class UserCampaigns extends React.Component{
     this.setState({isEditing: false})
   };
 
+  updateCampaign(key){
+    const { user_campaign } = this.props;
+    {/*  start*/}
+    console.log(key,'key here')
+    console.log(this.props.user_campaign[key],'key here')
+    const campaignArr = map(user_campaign, (campaign, key) => <UpdateCampaign
+      campaign={campaign} onCancelEdit={this.onCancelEdit} key={key} />)
+
+     return (
+       <div>
+         {find(campaignArr, (campaign) => campaign )}
+       </div>
+     )
+  }
+
   render(){
-    console.log(this.props.user_campaign, 'ARRAY PROPS')
     const {isEditing} = this.state;
     const { classes, user_campaign } = this.props;
     {/*  start*/}
-    const campaignArr = _.map(user_campaign, (campaign, key) => <UpdateCampaign
-      campaign={campaign} onCancelEdit={this.onCancelEdit} key={campaign._id} id={key} />)
-
-    const foundCampaign = _.find(campaignArr, (campaign) => campaign );
-    console.log(campaignArr, 'Key to campaign')
     return (
-      isEditing ? foundCampaign :
-        _.map(user_campaign, (campaign, key) => <div className="cd-section" key={key} id={key}>
+      isEditing ? this.updateCampaign() :
+        map(user_campaign, (campaign, key) => <div className="cd-section" key={key} id={key}>
           <div className={classes.container}>
             <GridContainer>
               <GridItem
@@ -100,7 +109,7 @@ class UserCampaigns extends React.Component{
                         <Button
                           className={classes.mrAuto}
                           color="info"
-                          onClick={this.onClickEdit}
+                          onClick={()=> {this.onClickEdit(); this.updateCampaign(key)}}
                           round
                           size="sm">Edit</Button>
                       </Grid>

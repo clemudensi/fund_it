@@ -13,10 +13,11 @@ export default function fetchUsers() {
   return async (dispatch) => {
     try {
       const user = await axios.get('/api/v1/user/:id/dashboard');
-      dispatch(fetchLoginSuccess(user.data))
+      dispatch(fetchLoginSuccess(user.data));
     } catch (err) {
       if(err.response.status === 401 || 304) {
-        window.location.replace("/");
+        // window.location.replace("/");
+        return err
       }
     }
   }

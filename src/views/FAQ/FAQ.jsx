@@ -12,16 +12,8 @@ import GridItem from "components/Grid/GridItem.jsx";
 
 import Button from "components/CustomButtons/Button.jsx";
 
-import Media from "components/Media/Media.jsx";
-
-
 import style from "assets/jss/material-kit-pro-react/views/componentsSections/contentAreas.jsx";
 import Accordion from "components/Accordion/Accordion.jsx";
-
-import avatar from "assets/img/faces/avatar.jpg";
-import kendall from "assets/img/faces/kendall.jpg";
-import marc from "assets/img/faces/marc.jpg";
-import placeholder from "assets/img/placeholder.jpg";
 
 class SectionContentAreas extends React.Component {
   constructor(props) {

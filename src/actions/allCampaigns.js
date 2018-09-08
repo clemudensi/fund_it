@@ -1,14 +1,14 @@
 import axios from 'axios';
-import {FETCH_ALL_USER_CAMPAIGN} from './types';
+import {FETCH_ALL_CAMPAIGN} from './types';
 
-export const fetchCampaignSuccess = all_user_campaign => {
+export const fetchCampaignSuccess = all_campaign => {
   return {
-    type: FETCH_ALL_USER_CAMPAIGN,
-    all_user_campaign
+    type: FETCH_ALL_CAMPAIGN,
+    all_campaign
   }
 };
 
-export default function fetchAllUserCampaign() {
+export default function fetchAllCampaign() {
   // axios.defaults.headers.common['Authorization'] = localStorage.getItem('id_token');
   return async (dispatch) => {
     try {

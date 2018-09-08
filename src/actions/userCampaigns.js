@@ -17,6 +17,7 @@ export default function fetchUserCampaign() {
     } catch (err) {
       if(err.response.status === 401 || 304) {
         window.location.replace("/");
+        // return err
       }
     }
   }

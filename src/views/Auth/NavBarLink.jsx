@@ -3,36 +3,23 @@ import React from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // react components for routing our app without refresh
-import { Link } from "react-router-dom";
 
+import { Link } from "react-router-dom";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Tooltip from "@material-ui/core/Tooltip";
-
-// @material-ui/icons
-import Apps from "@material-ui/icons/Apps";
-import ViewDay from "@material-ui/icons/ViewDay";
-import Dns from "@material-ui/icons/Dns";
-import Build from "@material-ui/icons/Build";
-import ListIcon from "@material-ui/icons/List";
-import People from "@material-ui/icons/People";
-import Assignment from "@material-ui/icons/Assignment";
-import MonetizationOn from "@material-ui/icons/MonetizationOn";
+import Person from "@material-ui/icons/Person";
 import Chat from "@material-ui/icons/Chat";
-import Call from "@material-ui/icons/Call";
-import Layers from "@material-ui/icons/Layers";
-import ContentPaste from "@material-ui/icons/ContentPaste";
-import LineStyle from "@material-ui/icons/LineStyle";
-
+import Eject from "@material-ui/icons/Eject";
+// @material-ui/icons
+// import ContentPaste from "@material-ui/icons/ContentPaste";
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown";
-import Login from 'views/Auth/Login';
-import SignUp from 'views/Auth/SignUp';
 
-import headerLinksStyle from "assets/jss/material-kit-pro-react/components/headerLinksStyle.jsx";
-import Button from "../CustomButtons/Button";
+import navbarsStyle from "assets/jss/material-kit-pro-react/views/componentsSections/navbarsStyle.jsx";
+import Button from "components/CustomButtons/Button";
+import profileImage from "assets/img/faces/avatar.jpg";
 
 function HeaderLinks({ ...props }) {
   const easeInOutQuad = (t, b, c, d) => {
@@ -74,28 +61,61 @@ function HeaderLinks({ ...props }) {
   };
   var onClickSections = {};
 
+  const logout = () => {
+    localStorage.removeItem('id_token');
+    window.location.reload();
+  };
+
   const { classes, dropdownHoverColor } = props;
   return (
     <List className={classes.list + " " + classes.mlAuto}>
+
       <ListItem className={classes.listItem}>
         <Button
-          href="#whyUs"
+          href="#campaign"
           className={classes.navLink}
-          onClick={e => e.preventDefault()}
+          color="transparent"
+        >
+          About Us
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button
+          href="/campaigns"
+          className={classes.navLink}
           color="transparent"
         >
           Campaign
         </Button>
       </ListItem>
-
-      {/*Sign in Button*/}
       <ListItem className={classes.listItem}>
-        <Login />
-      </ListItem>
-
-      {/*Sign Up Button*/}
-      <ListItem className={classes.listItem}>
-        <SignUp />
+        <CustomDropdown
+          noLiPadding
+          navDropdown
+          hoverColor={dropdownHoverColor}
+          buttonText={
+            <img
+              src={profileImage}
+              className={classes.img}
+              alt="profile"
+            />
+          }
+          buttonProps={{
+            className: classes.navLink,
+            color: "transparent"
+          }}
+          dropdownList={[
+            <Link to={`/user/${props.id}/dashboard`} className={classes.dropdownLink}>
+              <Person className={classes.dropdownIcons} /> Profile
+            </Link>,
+            <Link to="/campaigns" className={classes.dropdownLink}>
+              <Chat className={classes.dropdownIcons} /> Campaign
+            </Link>,
+            <Button color="transparent" onClick={logout}>
+              <Eject className={classes.dropdownIcons} /> Log Out
+            </Button>
+          ]}
+        />
       </ListItem>
 
     </List>
@@ -118,4 +138,4 @@ HeaderLinks.propTypes = {
   ])
 };
 
-export default withStyles(headerLinksStyle)(HeaderLinks);
+export default withStyles(navbarsStyle)(HeaderLinks);

@@ -22,6 +22,7 @@ import FormControl from "@material-ui/core/FormControl";
 import {bindActionCreators} from "redux";
 import fetchUser from "actions/users";
 import {connect} from "react-redux";
+import CreateCampaign from "./CreateCampaign";
 
 class UpdateCampaign extends React.Component {
   constructor(props) {
@@ -106,164 +107,11 @@ class UpdateCampaign extends React.Component {
   };
 
   render() {
-    const { classes, campaign} = this.props;
-    const {
-      campaign_title,
-      campaign_description,
-      campaign_amount,
-      campaign_duration,
-    } = this.state;
     const topPadding = {paddingTop: 30};
     return (
       <div className={classes.main}>
         <h2 className={classes.title} align="center" style={topPadding}>Update {campaign.campaign_title} Campaign</h2>
-        <div className={classes.space20} />
-        <div id="comments">
-          <GridContainer>
-            <GridItem
-              xs={12}
-              sm={8}
-              md={8}
-            >
-              <form className={classes.form} onSubmit={this.handleFormSubmit}>
-                <Media
-                  title={<div>
-                    <Button round onClick={this.uploadWidget} >
-                      Upload Image
-                    </Button>
-                    <h4>{this.state.fileName}.{this.state.format}</h4>
-                  </div>
-                  }
-                  avatar={placeholder}
-                  body={
-                    <div>
-                      <GridContainer>
-                        <GridItem xs={12} sm={6} md={6}>
-                          <CustomInput
-                            formControlProps={{
-                              fullWidth: true
-                            }}
-                            inputProps={{
-                              value: campaign_title,
-                              onChange: this.handleTitle,
-                              placeholder: "Campaign Title"
-                            }}
-                          />
-                        </GridItem>
-                        <GridItem xs={12} sm={6} md={6}>
-                          <CustomInput
-                            formControlProps={{
-                              fullWidth: true
-                            }}
-                            inputProps={{
-                              value: campaign_duration,
-                              onChange: this.handleDuration,
-                              placeholder: "Duration (0 - 45 days)"
-                            }}
-                          />
-                        </GridItem>
-                        <GridItem xs={12} sm={6} md={6}>
-                          <FormControl
-                            fullWidth
-                            className={classes.selectFormControl}>
-                            <InputLabel
-                              htmlFor="simple-select"
-                              className={classes.selectLabel}>
-                              Select Campaign Category
-                            </InputLabel>
-                            <Select
-                              MenuProps={{
-                                className: classes.selectMenu
-                              }}
-                              classes={{
-                                select: classes.select
-                              }}
-                              value={this.state.campaign_type}
-                              onChange={this.handleSimple}
-                              inputProps={{
-                                name: "campaign_type",
-                                id: "simple-select"
-                              }}>
-                              <MenuItem
-                                disabled
-                                classes={{
-                                  root: classes.selectMenuItem
-                                }}>
-                                Category
-                              </MenuItem>
-                              <MenuItem
-                                classes={{
-                                  root: classes.selectMenuItem,
-                                  selected: classes.selectMenuItemSelected
-                                }}
-                                value="Charity">
-                                Charity
-                              </MenuItem>
-                              <MenuItem
-                                classes={{
-                                  root: classes.selectMenuItem,
-                                  selected: classes.selectMenuItemSelected
-                                }}
-                                value="Enterprise">
-                                Enterprise
-                              </MenuItem>
-                              <MenuItem
-                                classes={{
-                                  root: classes.selectMenuItem,
-                                  selected: classes.selectMenuItemSelected
-                                }}
-                                value="Gifts">
-                                Gifts
-                              </MenuItem>
-                            </Select>
-                          </FormControl>
-                        </GridItem>
-                      </GridContainer>
-                      <GridContainer>
-                        <GridItem xs={12} sm={6} md={6}>
-                          <CustomInput
-                            id="not-logged-name"
-                            formControlProps={{
-                              fullWidth: true
-                            }}
-                            inputProps={{
-                              value: campaign_amount,
-                              onChange: this.handleAmount,
-                              placeholder: "Amount in digits e.g(5000)"
-                            }}
-                          />
-                        </GridItem>
-                      </GridContainer>
-                      <CustomInput
-                        id="not-logged-message"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                        inputProps={{
-                          value: campaign_description,
-                          onChange: this.handleDescription,
-                          multiline: true,
-                          rows: 6,
-                          placeholder: "Campaign Description"
-                        }}
-                      />
-                    </div>
-                  }
-                  footer={
-                    <div className={classes.signInButton}>
-                      <Button type="submit" color="info" className={classes.floatRight} round>
-                        Send
-                      </Button>
-                      <Button color="rose" className={classes.floatLeft} round onClick={this.props.onCancelEdit}>
-                        Cancel
-                      </Button>
-                    </div>
-                  }
-                />
-              </form>
-            </GridItem>
-          </GridContainer>
-        </div>
+        <CreateCampaign/>
       </div>
     );
   }

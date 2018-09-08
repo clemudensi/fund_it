@@ -2,18 +2,9 @@ import React from "react";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-import Checkbox from "@material-ui/core/Checkbox";
-import Tooltip from "@material-ui/core/Tooltip";
+import omit from 'lodash/omit';
 // @material-ui/core icons
-import Person from "@material-ui/icons/Person";
-import Edit from "@material-ui/icons/Edit";
-import Close from "@material-ui/icons/Close";
-import Check from "@material-ui/icons/Check";
-import Remove from "@material-ui/icons/Remove";
-import Add from "@material-ui/icons/Add";
-import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
-import Reply from "@material-ui/icons/Reply";
-import Favorite from "@material-ui/icons/Favorite";
+
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
@@ -51,7 +42,8 @@ class SectionContentAreas extends React.Component {
   }
   render() {
     const topPadding = {paddingTop: 30};
-    const { classes, ...rest } = this.props;
+    const { classes} = this.props;
+    const rest = omit(this.props, 'staticContext');
     return (
       <div {...rest} className={classes.main} id="contentAreas">
         <h2 className={classes.title} align="center" style={topPadding}>Contact Us!</h2>
@@ -83,7 +75,6 @@ class SectionContentAreas extends React.Component {
                       </GridItem>
                       <GridItem xs={12} sm={4} md={4}>
                         <CustomInput
-                          id="not-logged-email"
                           formControlProps={{
                             fullWidth: true
                           }}
@@ -94,7 +85,6 @@ class SectionContentAreas extends React.Component {
                       </GridItem>
                       <GridItem xs={12} sm={4} md={4}>
                         <CustomInput
-                          id="not-logged-email"
                           formControlProps={{
                             fullWidth: true
                           }}
