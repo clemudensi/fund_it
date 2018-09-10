@@ -113,7 +113,7 @@ class NavPills extends React.Component {
 
 NavPills.defaultProps = {
   active: 0,
-  color: "primary"
+  color: "info"
 };
 
 NavPills.propTypes = {

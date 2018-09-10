@@ -17,6 +17,14 @@ export default class LocalAuthService {
         return Promise.resolve(res);
     }
 
+  async adminSignup(firstName, lastName, email, password, adminCode){
+    const res = await axios.post('/api/v1/admin/signup',{
+      firstName, lastName, email, password, adminCode
+    });
+    localStorage.setItem('id_token', res.headers['x-Auth-token']);
+    return Promise.resolve(res);
+  }
+
     loggedIn() {
         const token = localStorage.getItem('id_token');
         return !!token && !this.isTokenExpired(token)

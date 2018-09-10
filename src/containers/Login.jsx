@@ -26,7 +26,7 @@ import CustomInput from "components/CustomInput/CustomInput.jsx";
 import javascriptStyles from "assets/jss/material-kit-pro-react/views/componentsSections/javascriptStyles";
 // import LocalAuthService from './components/LocalAuthService';
 // import FacebookAuth from "./loginFacebook/FacebookAuth";
-// import DashboardProps from 'routes/dashboard'
+// import DashboardProps from 'routes/UserDashboard'
 
 
 function Transition(props) {

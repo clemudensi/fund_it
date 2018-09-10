@@ -4,9 +4,9 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
 
 // core components/views
-import DashboardPage from "views/dashboard/Dashboard.jsx";
+import DashboardPage from "views/UserDashboard/UserDashboard.jsx";
 import UserProfile from "containers/UserProfile";
-import UserCampaign from "views/dashboard/UserCampaign/UserCampaignSections";
+import UserCampaign from "views/UserDashboard/UserCampaign/UserCampaignSections";
 
 const spliLink = window.location.pathname.split('/')[2];
 console.log(spliLink, 'split link', this.props);
@@ -20,7 +20,7 @@ class dashboardRoutes extends React.Component{
       {
         path: "/panel",
         sidebarName: "Dashboard",
-        navbarName: "Material Dashboard",
+        navbarName: "Material UserDashboard",
         icon: Dashboard,
         component: DashboardPage
       },

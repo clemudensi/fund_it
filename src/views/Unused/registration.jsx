@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Fa, Input} from 'react-bootstrap';
-import Auth from './components/LocalAuthService';
+import Auth from '../Auth/components/LocalAuthService';
 
 class Signup extends Component {
     constructor(props) {
@@ -43,7 +43,7 @@ class Signup extends Component {
         try {
             const res = await this.Auth.signup(firstName, lastName, email, password);
             if( res.data.token){
-                // this.props.history.replace('/dashboard');
+                // this.props.history.replace('/UserDashboard');
               console.log('I was fired as a signup')
             }
         }catch (error) {

@@ -12,7 +12,7 @@ import sectionsPageStyle from "assets/jss/material-kit-pro-react/views/sectionsP
 
 class HomePage extends React.Component {
   componentDidMount() {
-    var href = window.location.href.substring(
+    const href = window.location.href.substring(
       window.location.href.lastIndexOf("#") + 1
     );
     if (window.location.href.lastIndexOf("#") > 0)
@@ -20,12 +20,7 @@ class HomePage extends React.Component {
     window.addEventListener("scroll", this.updateView);
     this.updateView();
   }
-  componentDidUpdate() {
-    var href = window.location.href.substring(
-      window.location.href.lastIndexOf("#") + 1
-    );
-    // document.getElementById(href).scrollIntoView();
-  }
+
   componentWillUnmount() {
     window.removeEventListener("scroll", this.updateView);
   }
@@ -36,13 +31,13 @@ class HomePage extends React.Component {
     return -c / 2 * (t * (t - 2) - 1) + b;
   }
   updateView() {
-    var contentSections = document.getElementsByClassName("cd-section");
-    var navigationItems = document
+    const contentSections = document.getElementsByClassName("cd-section");
+    const navigationItems = document
       .getElementById("cd-vertical-nav")
       .getElementsByTagName("a");
 
     for (let i = 0; i < contentSections.length; i++) {
-      var activeSection =
+      const activeSection =
         parseInt(navigationItems[i].getAttribute("data-number"), 10) - 1;
       if (
         contentSections[i].offsetTop - window.innerHeight / 2 <
@@ -59,18 +54,18 @@ class HomePage extends React.Component {
     }
   }
   smoothScroll(target) {
-    var targetScroll = document.getElementById(target);
+    const targetScroll = document.getElementById(target);
     this.scrollGo(document.documentElement, targetScroll.offsetTop, 1250);
   }
   scrollGo(element, to, duration) {
-    var start = element.scrollTop,
+    let start = element.scrollTop,
       change = to - start,
       currentTime = 0,
       increment = 20;
 
-    var animateScroll = function() {
+    const animateScroll = function() {
       currentTime += increment;
-      var val = this.easeInOutQuad(currentTime, start, change, duration);
+      const val = this.easeInOutQuad(currentTime, start, change, duration);
       element.scrollTop = val;
       if (currentTime < duration) {
         setTimeout(animateScroll, increment);
@@ -97,7 +92,7 @@ class HomePage extends React.Component {
                 data-number="1"
                 className="is-selected"
                 onClick={e => {
-                  var isMobile = navigator.userAgent.match(
+                  const isMobile = navigator.userAgent.match(
                     /(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i
                   );
                   if (isMobile) {
@@ -118,7 +113,7 @@ class HomePage extends React.Component {
                 data-number="2"
                 className=""
                 onClick={e => {
-                  var isMobile = navigator.userAgent.match(
+                  const isMobile = navigator.userAgent.match(
                     /(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i
                   );
                   if (isMobile) {
@@ -139,7 +134,7 @@ class HomePage extends React.Component {
                 data-number="3"
                 className=""
                 onClick={e => {
-                  var isMobile = navigator.userAgent.match(
+                  const isMobile = navigator.userAgent.match(
                     /(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i
                   );
                   if (isMobile) {
@@ -160,7 +155,7 @@ class HomePage extends React.Component {
                 data-number="4"
                 className=""
                 onClick={e => {
-                  var isMobile = navigator.userAgent.match(
+                  const isMobile = navigator.userAgent.match(
                     /(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i
                   );
                   if (isMobile) {

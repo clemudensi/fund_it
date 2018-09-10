@@ -17,9 +17,6 @@ import fetchUser from './actions/users';
 import connect from 'react-redux/es/connect/connect';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    }
 
   componentWillMount(){
     this.props.fetchUser();
@@ -61,4 +58,4 @@ export default withRouter(withAuth(connect(mapStateToProps, mapDispatchToProps)(
 
 
 //todo - Adding of react pop-up package
-// todo - if logged in and refreshed redirect to dashboard
+// todo - if logged in and refreshed redirect to UserDashboard

@@ -255,7 +255,7 @@ material-kit-pro
         │   └── HomePage.jsx     ├── ShoppingCartPage
         │   └── ShoppingCartPage.jsx
         └── SignupPage
-            └── SignupPage.jsx
+            └── AdminLogin.jsx
 ```
 
 

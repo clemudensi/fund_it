@@ -12,8 +12,14 @@ export default function fetchUsers() {
   axios.defaults.headers.common['Authorization'] = localStorage.getItem('id_token');
   return async (dispatch) => {
     try {
-      const user = await axios.get('/api/v1/user/:id/dashboard');
-      dispatch(fetchLoginSuccess(user.data));
+      if (window.location.pathname === '/') {
+        const user = await axios.get('/api/v1/user/:id/dashboard');
+        dispatch(fetchLoginSuccess(user.data));
+      }
+      if (window.location.pathname === '/admin/login') {
+        const user = await axios.get('/api/v1/admin/:id/dashboard');
+        dispatch(fetchLoginSuccess(user.data));
+      }
     } catch (err) {
       if(err.response.status === 401 || 304) {
         // window.location.replace("/");

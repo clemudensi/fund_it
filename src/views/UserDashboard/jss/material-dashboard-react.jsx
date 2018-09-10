@@ -1,7 +1,7 @@
 /*!
 
  =========================================================
- * Material Dashboard React - v1.3.0 based on Material Dashboard - v1.2.0
+ * Material UserDashboard React - v1.3.0 based on Material UserDashboard - v1.2.0
  =========================================================
 
  * Product Page: http://www.creative-tim.com/product/material-dashboard-react

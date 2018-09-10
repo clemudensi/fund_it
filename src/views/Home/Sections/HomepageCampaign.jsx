@@ -69,7 +69,7 @@ class Campaigns extends React.Component {
         }`} key={key}>
         <Card blog>
           <CardHeader image>
-            <img src={campaign.campaign_image} alt="Campaign Image" />
+            <img src={campaign.campaign_image} alt="Campaign" />
             <div
               className={classes.coloredShadow}
               style={{

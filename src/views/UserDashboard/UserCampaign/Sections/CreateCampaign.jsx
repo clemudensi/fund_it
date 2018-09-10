@@ -17,14 +17,15 @@ import Close from "@material-ui/icons/Close";
 import placeholder from "assets/img/placeholder.jpg";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Accordion from "components/Accordion/Accordion";
 import {bindActionCreators} from "redux";
 import fetchUser from "actions/users";
 import {connect} from "react-redux";
 import map from 'lodash/map';
+import forEach from 'lodash/forEach';
 import remove from 'lodash/remove';
+import selectMenu from './selectMenu';
 
 class CreateCampaign extends React.Component {
   constructor(props) {
@@ -120,10 +121,6 @@ class CreateCampaign extends React.Component {
     this.setState((prevState) => ({ funding: prevState.funding }))
   };
 
-  updateCampaign(oldCampaign, newCampaign){
-
-  }
-
   uploadWidget = () =>{
     window.cloudinary.openUploadWidget({ cloud_name: 'fundit-app', upload_preset: 'fua6wfmh', tags:['fundit']},
       (error, result) => {
@@ -168,8 +165,6 @@ class CreateCampaign extends React.Component {
   };
 
   render() {
-    // console.log(this.state.fund_amount, 'Fund Amount')
-    // console.log(this.state.funding, 'Fund state with separate push')
     const { classes} = this.props;
     const {
       campaign_title,
@@ -255,37 +250,16 @@ class CreateCampaign extends React.Component {
                                 name: "campaign_type",
                                 id: "simple-select"
                               }}>
-                              <MenuItem
-                                disabled
-                                classes={{
-                                  root: classes.selectMenuItem
-                                }}>
-                                Category
-                              </MenuItem>
-                              <MenuItem
-                                classes={{
-                                  root: classes.selectMenuItem,
-                                  selected: classes.selectMenuItemSelected
-                                }}
-                                value="Charity">
-                                Charity
-                              </MenuItem>
-                              <MenuItem
-                                classes={{
-                                  root: classes.selectMenuItem,
-                                  selected: classes.selectMenuItemSelected
-                                }}
-                                value="Enterprise">
-                                Enterprise
-                              </MenuItem>
-                              <MenuItem
-                                classes={{
-                                  root: classes.selectMenuItem,
-                                  selected: classes.selectMenuItemSelected
-                                }}
-                                value="Gifts">
-                                Gifts
-                              </MenuItem>
+                              {forEach(selectMenu(classes.selectMenuItem, classes.selectMenuItemSelected),
+                                (item, key) => <div key={key}>{item}</div>)}
+                              {/*<MenuItem*/}
+                                {/*classes={{*/}
+                                  {/*root: classes.selectMenuItem,*/}
+                                  {/*selected: classes.selectMenuItemSelected*/}
+                                {/*}}*/}
+                                {/*value="Gifts">*/}
+                                {/*Gifts*/}
+                              {/*</MenuItem>*/}
                             </Select>
                           </FormControl>
                         </GridItem>

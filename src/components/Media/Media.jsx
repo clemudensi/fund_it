@@ -44,8 +44,8 @@ function Media({ ...props }) {
 }
 
 Media.defaultProps = {
-  avatarLink: "#pablo",
-  avatarAlt: "..."
+  // avatarLink: "#pablo",
+  avatarAlt: "image"
 };
 
 Media.propTypes = {

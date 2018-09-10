@@ -2,15 +2,10 @@ import React from "react";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-// @material-ui/core icons
-import Person from "@material-ui/icons/Person";
-import Edit from "@material-ui/icons/Edit";
-import Close from "@material-ui/icons/Close";
+
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
-
-import Button from "components/CustomButtons/Button.jsx";
 
 import style from "assets/jss/material-kit-pro-react/views/componentsSections/contentAreas.jsx";
 import Accordion from "components/Accordion/Accordion.jsx";
@@ -38,28 +33,7 @@ class SectionContentAreas extends React.Component {
   }
   render() {
     const { classes, ...rest } = this.props;
-    const fillButtons = [
-      { color: "info", icon: Person },
-      { color: "success", icon: Edit },
-      { color: "danger", icon: Close }
-    ].map((prop, key) => {
-      return (
-        <Button justIcon size="sm" color={prop.color} key={key}>
-          <prop.icon />
-        </Button>
-      );
-    });
-    const simpleButtons = [
-      { color: "info", icon: Person },
-      { color: "success", icon: Edit },
-      { color: "danger", icon: Close }
-    ].map((prop, key) => {
-      return (
-        <Button simple justIcon size="sm" color={prop.color} key={key}>
-          <prop.icon />
-        </Button>
-      );
-    });
+
     return (
       <div {...rest} className="cd-section" id="contentAreas">
         <div className={classes.space50} />

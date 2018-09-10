@@ -5,8 +5,6 @@ import classNames from "classnames";
 import Carousel from "react-slick";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
 // @material-ui/icons
 
 import Button from "components/CustomButtons/Button";

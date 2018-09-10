@@ -21,7 +21,7 @@ import {bindActionCreators} from "redux";
 import fetchUser from "../../actions/users";
 import connect from "react-redux/es/connect/connect";
 
-console.log(DashboardRoutes, 'Dashboard Routes')
+console.log(DashboardRoutes, 'UserDashboard Routes')
 class SwitchRoutes extends React.Component {
   constructor(props){
     super(props)

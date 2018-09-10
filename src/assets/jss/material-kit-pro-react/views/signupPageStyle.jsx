@@ -1,15 +1,8 @@
-import {
-  container,
-  description,
-  cardTitle
-} from "assets/jss/material-kit-pro-react.jsx";
+import { container, cardTitle } from "assets/jss/material-kit-pro-react.jsx";
+
+import customCheckboxRadioSwitchStyle from "assets/jss/material-kit-pro-react/customCheckboxRadioSwitchStyle.jsx";
 
 const signupPageStyle = {
-  description,
-  cardTitle: {
-    ...cardTitle,
-    color: "#000 !important"
-  },
   container: {
     ...container,
     zIndex: "2",
@@ -19,7 +12,7 @@ const signupPageStyle = {
   },
   pageHeader: {
     minHeight: "100vh",
-    maxHeight: "1000px",
+    maxHeight: "1600px",
     height: "auto",
     display: "inherit",
     position: "relative",
@@ -30,6 +23,10 @@ const signupPageStyle = {
     "&:before": {
       background: "rgba(0, 0, 0, 0.5)"
     },
+    // "&:after": {
+    //   background:
+    //     "linear-gradient(60deg,rgba(225,190,231,.56),rgba(186,104,200,.95))"
+    // },
     "&:before,&:after": {
       position: "absolute",
       zIndex: "1",
@@ -41,27 +38,46 @@ const signupPageStyle = {
       content: '""'
     }
   },
-  form: {
-    margin: "0"
+  cardSignup: {
+    borderRadius: "6px",
+    boxShadow:
+      "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);",
+    marginBottom: "100px",
+    padding: "40px 0px"
   },
-  cardHeader: {
-    width: "auto",
-    textAlign: "center"
+  cardTitle: {
+    ...cardTitle,
+    textDecoration: "none",
+    textAlign: "center !important",
+    marginBottom: "0.75rem"
   },
-  socialLine: {
-    marginTop: "1rem",
-    textAlign: "center",
-    padding: "0"
-  },
-  inputIconsColor: {
-    color: "#495057"
+  ...customCheckboxRadioSwitchStyle,
+  socials: {
+    marginTop: "0",
+    position: "absolute",
+    width: "100%",
+    transform: "none",
+    left: "0",
+    top: "0",
+    height: "100%",
+    lineHeight: "41px",
+    fontSize: "20px"
   },
   textCenter: {
     textAlign: "center"
   },
-  iconButtons: {
-    marginRight: "3px !important",
-    marginLeft: "3px !important"
+  inputAdornment: {
+    marginRight: "18px",
+    position: "relative"
+  },
+  inputAdornmentIcon: {
+    color: "#495057"
+  },
+  form: {
+    margin: "0"
+  },
+  infoArea: {
+    padding: "0px 0px 20px !important"
   },
   block: {
     color: "inherit",
@@ -104,14 +120,6 @@ const signupPageStyle = {
     height: "18px",
     top: "3px",
     position: "relative"
-  },
-  footer: {
-    position: "absolute",
-    width: "100%",
-    background: "transparent",
-    bottom: "0",
-    color: "#fff",
-    zIndex: "2"
   }
 };
 

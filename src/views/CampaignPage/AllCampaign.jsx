@@ -4,7 +4,6 @@ import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 // @material-ui/icons
 import Favorite from "@material-ui/icons/Favorite";
-import Timelapse from '@material-ui/icons/Timelapse';
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
@@ -19,14 +18,12 @@ import styles from "assets/jss/material-kit-pro-react/views/componentsSections/s
 
 import cardBlog2 from "assets/img/examples/card-blog2.jpg";
 
-import blog8 from "assets/img/examples/blog8.jpg";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import fetchAllCampaign from "actions/allCampaigns";
 import Link from "react-router-dom/es/Link";
 import omit from 'lodash/omit';
 import map from 'lodash/map';
-import _ from "lodash";
 
 
 class Campaigns extends React.Component {
@@ -55,14 +52,14 @@ class Campaigns extends React.Component {
     return campaign_status ? "success" : "disabled";
   };
 
-  onClickFollow = () => {
+  onClickFollow (key){
+    // const campaign = this.props.all_campaign[key];
     this.setState((prevState) =>
       ({ follow: !prevState.follow })
     );
   };
 
   renderCampaign(){
-    // const size = 3;
     const { classes, all_campaign } = this.props;
     return(
       map(all_campaign, (campaign, key) => <GridItem md={4} sm={4} className={`${classes.mlAuto} ${classes.mrAuto} ${
@@ -70,7 +67,7 @@ class Campaigns extends React.Component {
         }`} key={key}>
         <Card blog>
           <CardHeader image>
-            <img src={campaign.campaign_image} alt="Campaign Image" />
+            <img src={campaign.campaign_image} alt="Campaign" />
             <div
               className={classes.coloredShadow}
               style={{
@@ -97,7 +94,7 @@ class Campaigns extends React.Component {
               <span><h4>${campaign.campaign_amount}</h4></span>
             </div>
             <div className={`${classes.stats} ${classes.mlAuto}`}>
-              <Favorite color={this.handleFollow()} onClick={this.onClickFollow}/>
+              <Favorite color={this.handleFollow()} onClick={() => this.onClickFollow(key)}/>
               345
             </div>
           </CardFooter>
@@ -118,7 +115,6 @@ class Campaigns extends React.Component {
     const { classes, } = this.props;
     const rest = omit(this.props, 'fetchAllCampaign', 'staticContext')
     return (
-      // _.map(user_campaign, (campaign, key) =>
       <div className="cd-section" {...rest}>
         <div className={classes.container}>
           <div>

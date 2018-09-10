@@ -42,7 +42,7 @@ class Login extends Component{
     //         // const token = res.headers.get('x-Auth-token');
     //         if( res.headers['x-Auth-token']){
     //             // console.log(res);
-    //             // this.props.history.replace('/dashboard');
+    //             // this.props.history.replace('/UserDashboard');
     //           console.log(res.headers['x-Auth-token'])
     //         }
     //       // console.log(res, 'login res here')s

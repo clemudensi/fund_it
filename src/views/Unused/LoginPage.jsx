@@ -6,8 +6,8 @@ import InputAdornment from "material-ui/Input/InputAdornment";
 import Email from "@material-ui/icons/Email";
 import LockOutline from "@material-ui/icons/LockOutline";
 // import People from "@material-ui/icons/People";
-import LocalAuthService from './components/LocalAuthService';
-import FacebookAuth from "./loginFacebook/FacebookAuth";
+import LocalAuthService from '../Auth/components/LocalAuthService';
+import FacebookAuth from "../Auth/loginFacebook/FacebookAuth";
 
 // core components
 // import Header from "../../components/Header/Header.jsx";

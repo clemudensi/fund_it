@@ -1,5 +1,7 @@
 import React from "react";
 // @material-ui/core components
+import Person from '@material-ui/icons/Person';
+import People from '@material-ui/icons/People';
 import withStyles from "@material-ui/core/styles/withStyles";
 // core components
 import Button from "components/CustomButtons/Button.jsx";
@@ -8,17 +10,17 @@ import Loadable from 'react-loadable';
 import {MyLoadingComponent} from 'components/loadingComponent';
 
 const AsyncIndividual = Loadable({
-  loader: () => import('views/dashboard/UserProfile/UserSection/Individual'),
+  loader: () => import('views/UserDashboard/UserProfile/UserSection/Individual'),
   loading: MyLoadingComponent
 });
 
 const AsyncOrganization = Loadable({
-  loader: () => import('views/dashboard/UserProfile/UserSection/Organization'),
+  loader: () => import('views/UserDashboard/UserProfile/UserSection/Organization'),
   loading: MyLoadingComponent
 });
 
 const AsyncShowProfile = Loadable({
-  loader: () => import('views/dashboard/UserProfile/UserSection/ShowProfile'),
+  loader: () => import('views/UserDashboard/UserProfile/UserSection/ShowProfile'),
   loading: MyLoadingComponent
 });
 
@@ -55,13 +57,13 @@ class UserProfile extends React.Component {
 
   render(){
     const padButton = {paddingTop: 30, paddingLeft: 20};
-    let showIndividual = this.state.showIndividual ? <AsyncIndividual cancelEdit={this.onClickCancel}/> : null;
+    let showIndividual = this.state.showIndividual ? <AsyncIndividual cancelEdit={this.onClickCancel} /> : null;
     let showOrganization = this.state.showOrganization ? <AsyncOrganization cancelEdit={this.onClickCancel}/> : null;
     return (
       this.state.isEditing ?
         <div style={padButton}>
-          <Button onClick={this.renderIndividual} color="transparent" size="sm" round>Individual</Button>
-          <Button onClick={this.renderOrganization} color="transparent" size="sm" round>Organization</Button>
+          <Button onClick={this.renderIndividual} color="transparent" size="sm" round><Person/></Button>
+          <Button onClick={this.renderOrganization} color="transparent" size="sm" round><People/></Button>
           {/*<Button onClick={this.onClickCancel} color="transparent" size="sm" round>Cancel Edit</Button>*/}
           <div>
             {showIndividual}

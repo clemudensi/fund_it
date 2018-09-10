@@ -20,26 +20,26 @@ import BugReport from "@material-ui/icons/BugReport";
 import Code from "@material-ui/icons/Code";
 import Cloud from "@material-ui/icons/Cloud";
 // core components
-import GridItem from "./components/Grid/GridItem.jsx";
-import Table from "./components/Table/Table.jsx";
-import Tasks from "./components/Tasks/Tasks.jsx";
-import CustomTabs from "./components/CustomTabs/CustomTabs.jsx";
-import Danger from "./components/Typography/Danger.jsx";
-import Card from "./components/Card/Card.jsx";
-import CardHeader from "./components/Card/CardHeader.jsx";
-import CardIcon from "./components/Card/CardIcon.jsx";
-import CardBody from "./components/Card/CardBody.jsx";
-import CardFooter from "./components/Card/CardFooter.jsx";
+import GridItem from "../../components/Grid/GridItem.jsx";
+import Table from "../../components/Table/Table.jsx";
+import Tasks from "../UserDashboard/components/Tasks/Tasks.jsx";
+import CustomTabs from "../UserDashboard/components/CustomTabs/CustomTabs.jsx";
+import Danger from "../UserDashboard/components/Typography/Danger.jsx";
+import Card from "../../components/Card/Card.jsx";
+import CardHeader from "../UserDashboard/components/Card/CardHeader.jsx";
+import CardIcon from "../UserDashboard/components/Card/CardIcon.jsx";
+import CardBody from "../../components/Card/CardBody.jsx";
+import CardFooter from "../UserDashboard/components/Card/CardFooter.jsx";
 
-import { bugs, website, server } from "./variables/general";
+import { bugs, website, server } from "../UserDashboard/variables/general";
 
 import {
   dailySalesChart,
   emailsSubscriptionChart,
   completedTasksChart
-} from "./variables/charts";
+} from "../UserDashboard/variables/charts";
 
-import dashboardStyle from "./jss/dashboardStyle.jsx";
+import dashboardStyle from "../UserDashboard/jss/dashboardStyle.jsx";
 
 class Dashboard extends React.Component {
   state = {

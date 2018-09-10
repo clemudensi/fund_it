@@ -12,7 +12,7 @@ export default function fetchUserCampaign() {
   axios.defaults.headers.common['Authorization'] = localStorage.getItem('id_token');
   return async (dispatch) => {
     try {
-      const campaign = await axios.get('/api/v1/campaigns');
+      const campaign = await axios.get('/api/v1/user/:id/campaigns');
       dispatch(fetchCampaignSuccess(campaign.data))
     } catch (err) {
       if(err.response.status === 401 || 304) {

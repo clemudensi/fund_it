@@ -25,7 +25,6 @@ import CustomInput from "components/CustomInput/CustomInput.jsx";
 import javascriptStyles from "assets/jss/material-kit-pro-react/views/componentsSections/javascriptStyles.jsx";
 import LocalAuthService from "./components/LocalAuthService";
 import Person from "@material-ui/icons/Person";
-import checkboxAdnRadioStyle from "../dashboard/components/checkboxAdnRadioStyle";
 
 function Transition(props) {
   return <Slide direction="down" {...props} />;
@@ -96,7 +95,7 @@ class Singup extends React.Component {
     const { firstName, lastName, email, password, terms_condition } = this.state;
     const res = await this.Auth.signup(firstName, lastName, email, password, terms_condition);
     if( res.data.token){
-      window.location.replace(`/user/${res.data._id}`);
+      window.location.replace(`/user/${res.data._id}/dashboard`);
     }
   };
 
@@ -111,9 +110,7 @@ class Singup extends React.Component {
     }
   };
   render() {
-    // console.log(this.handleCheckBox, 'Checked Props');
-    // console.log(this.state.checked, 'Checked State');
-    const { firstName, lastName, email, password, confirmPassword, message } = this.state;
+    const { firstName, lastName, email, password, confirmPassword } = this.state;
     const { classes } = this.props;
     return (
       <div>
@@ -294,12 +291,12 @@ class Singup extends React.Component {
                       label={
                         <span>
                           I agree to the{" "}
-                          <a href="#pablo">terms and conditions</a>.
+                          <a href="/policy">terms and conditions</a>.
                         </span>
                       }
                     />
                     <div className={classes.textCenter}>
-                      <Button round color="primary" type="submit">
+                      <Button round color="info" type="submit">
                         Get started
                       </Button>
                     </div>

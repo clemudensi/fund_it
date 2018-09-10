@@ -9,7 +9,6 @@ export const fetchCampaignSuccess = all_campaign => {
 };
 
 export default function fetchAllCampaign() {
-  // axios.defaults.headers.common['Authorization'] = localStorage.getItem('id_token');
   return async (dispatch) => {
     try {
       const campaign = await axios.get('/api/v1/campaigns');

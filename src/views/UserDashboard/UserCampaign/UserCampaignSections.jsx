@@ -19,13 +19,13 @@ const  UserCampaignSection = () =>{
             )
           },
           {
-            tabButton: "User Campaigns",
+            tabButton: "User Campaign",
             tabContent: (
               <UserCampaign/>
             )
           },
           {
-            tabButton: "Funded Campaigns",
+            tabButton: "Funded Campaign",
             tabContent: (
               <FundedCampaign/>
             )

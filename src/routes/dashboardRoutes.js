@@ -1,6 +1,6 @@
-import DashboardLayout from "../views/dashboard/DashBoardPanel";
-import UserCampaign from "../views/dashboard/UserCampaign/Sections/UserCampaign";
-import UserProfile from "../views/dashboard/UserProfile/UserProfile";
+import DashboardLayout from "../views/Unused/DashBoardPanel";
+import UserCampaign from "../views/UserDashboard/UserCampaign/Sections/UserCampaign";
+import UserProfile from "../views/UserDashboard/UserProfile/UserProfile";
 
 let dashboard = [
   {path: '/panel', name: 'DashboardLayout', component: DashboardLayout },

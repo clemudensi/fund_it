@@ -19,7 +19,7 @@ import style from "assets/jss/material-kit-pro-react/views/componentsSections/co
 
 import placeholder from "assets/img/placeholder.jpg";
 
-class Contact extends React.Component {
+class FundingRequest extends React.Component {
 
   render() {
     const topPadding = {paddingTop: 30};
@@ -104,4 +104,4 @@ class Contact extends React.Component {
   }
 }
 
-export default withStyles(style)(Contact);
+export default withStyles(style)(FundingRequest);

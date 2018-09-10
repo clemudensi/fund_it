@@ -28,9 +28,7 @@ class ShowProfile extends React.Component {
             <h3 className={classes.cardPadding} align="center">{this.props.user_login.msg}</h3>
             <Card profile>
               <CardAvatar profile>
-                <a href="#pablo" onClick={e => e.preventDefault()}>
-                  <img src={avatar} alt="..." />
-                </a>
+                <img src={avatar} alt="profile" />
               </CardAvatar>
               <CardBody>
                 <h6 className={classes.cardCategory}>Entrepreneur</h6>

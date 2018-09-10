@@ -53,7 +53,7 @@ class ViewCampaign extends React.Component {
             <div className={classNames(classes.main, classes.mainRaised)}>
               <GridContainer>
                 <GridItem md={7} sm={4}>
-                  <img src={Image1} alt="Campaign Image" style={{width: 580, height: 350}} />
+                  <img src={Image1} alt="Campaign" style={{width: 580, height: 350}} />
                   <CampaignInfo/>
                 </GridItem>
                 <GridItem md={5} sm={4}>
