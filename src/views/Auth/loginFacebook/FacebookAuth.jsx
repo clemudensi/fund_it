@@ -36,17 +36,16 @@ class FacebookLogin extends Component{
   async registerFbUser(response){
     console.log(response, 'Login token');
     try {
-      const resolve = await axios.post('/api/Auth/facebook', {
+      const resolve = await axios.post('/api/auth/facebook', {
         access_token: response.authResponse.accessToken
       });
       let result = await Promise.resolve(resolve);
-      let token = result.headers["x-Auth-token"];
+      let token = result.headers["x-auth-token"];
       if (token) {
-        window.location.replace(`/user/${result.data._id}`);
+        window.location.replace(`/user/${result.data._id}/dashboard`);
         localStorage.setItem('id_token', token)
       }
       this.fetchDataFacebook();
-      console.log(result, 'inhere')
     } catch (err) {
       return err
     }

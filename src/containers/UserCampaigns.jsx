@@ -1,9 +1,4 @@
 import React from "react";
-// @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
-// core components
-
-import blogsStyle from "assets/jss/material-kit-pro-react/views/sectionsSections/blogsStyle.jsx";
 import UpdateCampaign from 'views/UserDashboard/UserCampaign/Sections/UpdateCampaign'
 import ShowCampaigns from 'views/UserDashboard/UserCampaign/Sections/ShowCampaign'
 import {bindActionCreators} from "redux";
@@ -35,8 +30,10 @@ class UserCampaigns extends React.Component{
     const {isEditing} = this.state;
     const { user_campaign, id } = this.props;
     return (
-      isEditing ? <UpdateCampaign user_campaign={user_campaign} onCancelEdit={this.onCancelEdit} id={this.state.id}/>
-        : <ShowCampaigns onClickEdit={this.onClickEdit} id={id} />
+      <div style={{maxHeight: "700px"}}>
+        { isEditing ? <UpdateCampaign user_campaign={user_campaign} onCancelEdit={this.onCancelEdit} id={this.state.id}/>
+          : <ShowCampaigns onClickEdit={this.onClickEdit} id={id} user_id={this.props.user_info_id}/>}
+      </div>
     );
   }
 }
@@ -51,4 +48,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({fetchUserCampaign}, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(blogsStyle)(UserCampaigns));
+export default connect(mapStateToProps, mapDispatchToProps)(UserCampaigns);

@@ -6,118 +6,110 @@ import withStyles from "@material-ui/core/styles/withStyles";
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
-import Table from "components/Table/Table.jsx";
+import Table from '@material-ui/core/Table';
 
 import style from "assets/jss/material-kit-pro-react/views/componentsSections/contentAreas.jsx";
+import {bindActionCreators} from "redux";
+import fetchAllUsersInfo from "actions/allUsersInfo";
+import connect from "react-redux/es/connect/connect";
+import omit from "lodash/omit";
+import map from 'lodash/map'
+import TableCell from "@material-ui/core/TableCell/TableCell";
+import Paper from "@material-ui/core/Paper/Paper";
+import TableHead from "@material-ui/core/TableHead/TableHead";
+import TableRow from "@material-ui/core/TableRow/TableRow";
+import TableBody from "@material-ui/core/TableBody/TableBody";
+import {Link} from "react-router-dom";
 
+const CustomTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor: "#00acc1",
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const styles = theme => ({
+  root: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto',
+  },
+  table: {
+    minWidth: 700,
+  },
+  row: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.background.default,
+    },
+  },
+});
 
 class AllUsers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: [1, 3, 5]
+      // checked: [1, 3, 5]
     };
-    this.handleToggle = this.handleToggle.bind(this);
   }
-  handleToggle(value) {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-    this.setState({
-      checked: newChecked
-    });
+
+  componentWillMount(){
+    this.props.fetchAllUsersInfo();
   }
+
   render() {
-    const { classes, ...rest } = this.props;
+    const rest = omit(this.props, 'fetchAllUsersInfo');
+    const { classes, all_users } = this.props;
+    // console.log(all_users.map(campaign => campaign.local), 'All users info')
     return (
-      <div {...rest} className="cd-section" id="contentAreas">
-        {/*<h2>Funded Campaign</h2>*/}
-        <div id="tables">
-          <GridContainer>
-            <GridItem
-              xs={12}
-              sm={10}
-              md={8}
-              // className={`${classes.mrAuto} ${classes.mlAuto}`}
-            >
-              <Table
-                tableHead={[
-                  "#",
-                  "Name",
-                  "Campaign Name",
-                  "Date",
-                  "Amount",
-                  "% Equity",
-                  "Status"
-                ]}
-                tableData={[
-                  [
-                    "1",
-                    "Andrew Mike",
-                    "Develop",
-                    "2013",
-                    "€ 99,225",
-                    5,
-                    "Ongoing"
-                    // fillButtons
-                  ],
-                  ["2", "John Doe", "Design", "2012", "€ 89,241"],
-                  [
-                    "3",
-                    "Alex Mike",
-                    "Design",
-                    "2010",
-                    "€ 92,144",
-                    2,
-                    "Ended"
-                    // simpleButtons
-                  ],
-                  [
-                    "4",
-                    "Mike Monday",
-                    "Marketing",
-                    "2013",
-                    "€ 49,990",
-                    3,
-                    "Ongoing"
-                    // roundButtons
-                  ],
-                  [
-                    "5",
-                    "Paul Dickens",
-                    "Communication",
-                    "2015",
-                    "€ 69,201",
-                    // fillButtons
-                  ]
-                ]}
-                customCellClasses={[
-                  classes.textCenter,
-                  classes.textRight,
-                  classes.textRight
-                ]}
-                customClassesForCells={[0, 4, 5]}
-                customHeadCellClasses={[
-                  classes.textCenter,
-                  classes.textRight,
-                  classes.textRight
-                ]}
-                customHeadClassesForCells={[0, 4, 5]}
-              />
+      <Paper className={classes.root}>
+        <Table className={classes.table}>
+          <TableHead>
+            <TableRow>
+              <CustomTableCell>#</CustomTableCell>
+              <CustomTableCell numeric>Name</CustomTableCell>
+              <CustomTableCell numeric>Email</CustomTableCell>
+              <CustomTableCell numeric>Total Campaign</CustomTableCell>
+              {/*<CustomTableCell numeric>Comments</CustomTableCell>*/}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {map(all_users, (campaign, key) => {
+              return (
+                <TableRow className={classes.row} key={key}>
+                  <CustomTableCell numeric>
+                    {key + 1}
+                  </CustomTableCell>
+                  <CustomTableCell numeric>
+                    {`${campaign.local.firstName} ${campaign.local.lastName}`}
+                  </CustomTableCell>
+                  <CustomTableCell numeric>
+                    {campaign.local.email}
+                  </CustomTableCell>
+                  <CustomTableCell numeric>
+                    {campaign.user_info.map(amount => amount.campaign_owned).length}
+                  </CustomTableCell>
 
-
-            </GridItem>
-          </GridContainer>
-
-        </div>
-      </div>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </Paper>
     );
   }
 }
 
-export default withStyles(style)(AllUsers);
+function mapStateToProps(state) {
+  return {
+    all_users: state.all_users
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({fetchAllUsersInfo}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(AllUsers));

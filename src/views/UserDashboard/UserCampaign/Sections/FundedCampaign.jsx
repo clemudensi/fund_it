@@ -9,31 +9,22 @@ import GridItem from "components/Grid/GridItem.jsx";
 import Table from "components/Table/Table.jsx";
 
 import style from "assets/jss/material-kit-pro-react/views/componentsSections/contentAreas.jsx";
+import {bindActionCreators} from "redux";
+import fetchFundedCampaign from "../../../../actions/userFundedCampaign";
+import connect from "react-redux/es/connect/connect";
+import map from "lodash/map";
 
 
 class FundedCampaign extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      checked: [1, 3, 5]
-    };
-    this.handleToggle = this.handleToggle.bind(this);
+
+  componentDidMount() {
+    this.props.fetchFundedCampaign()
   }
-  handleToggle(value) {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-    this.setState({
-      checked: newChecked
-    });
-  }
+
   render() {
-    const { classes, ...rest } = this.props;
+    const { classes, user_funded, ...rest } = this.props;
+    //loop through user_info to add funded campaign details to designated place holders
+    console.log(user_funded, 'UI FC')
     return (
       <div {...rest} className="cd-section" id="contentAreas">
         {/*<h2>Funded Campaign</h2>*/}
@@ -48,66 +39,63 @@ class FundedCampaign extends React.Component {
               <Table
                 tableHead={[
                   "#",
-                  "Name",
-                  "Campaign Name",
                   "Date",
-                  "Amount",
-                  "% Equity",
-                  "Status"
+                  "Campaign Name",
+                  "Funded Item",
+                  // "% Equity",
+                  // "Status"
                 ]}
-                tableData={[
-                  [
-                    "1",
-                    "Andrew Mike",
-                    "Develop",
-                    "2013",
-                    "€ 99,225",
-                    5,
-                    "Ongoing"
-                    // fillButtons
-                  ],
-                  ["2", "John Doe", "Design", "2012", "€ 89,241"],
-                  [
-                    "3",
-                    "Alex Mike",
-                    "Design",
-                    "2010",
-                    "€ 92,144",
-                    2,
-                    "Ended"
-                    // simpleButtons
-                  ],
-                  [
-                    "4",
-                    "Mike Monday",
-                    "Marketing",
-                    "2013",
-                    "€ 49,990",
-                    3,
-                    "Ongoing"
-                    // roundButtons
-                  ],
-                  [
-                    "5",
-                    "Paul Dickens",
-                    "Communication",
-                    "2015",
-                    "€ 69,201",
-                    // fillButtons
+                // tableData={[
+                //   [
+                //     "1",
+                //     "21-05-18",
+                //     "Special One",
+                //     "#50000",
+                //     // "2013",
+                //     // "€ 99,225",
+                //     // 5,
+                //     // "Ongoing"
+                //     // fillButtons
+                //   ],
+                //   ["2", "12-07-18", "Funny One", "Delivery Bus"],
+                //   [
+                //     "3",
+                //     "07-09-18",
+                //     "Great One",
+                //     "Building Equipment",
+                //     // "2010",
+                //     // "€ 92,144",
+                //     // 2,
+                //     // "Ended"
+                //     // simpleButtons
+                //   ],
+                //   // [
+                //   //   "4",
+                //   //   "Mike Monday",
+                //   //   "Marketing",
+                //   //   "2013",
+                //   //   "€ 49,990",
+                //   //   3,
+                //   //   "Ongoing"
+                //   //   // roundButtons
+                //   // ],
+                //   // [
+                //   //   "5",
+                //   //   "Paul Dickens",
+                //   //   "Communication",
+                //   //   "2015",
+                //   //   "€ 69,201",
+                //   //   // fillButtons
+                //   // ]
+                // ]}
+                tableData={map(user_funded.campaign_approval_funds, ((funded, key) => {
+                  return [
+                    key + 1,
+                    // funded.funded_date,
+                    user_funded.campaign_title,
+                    // funded.campaign-approval_funds.ma
                   ]
-                ]}
-                customCellClasses={[
-                  classes.textCenter,
-                  classes.textRight,
-                  classes.textRight
-                ]}
-                customClassesForCells={[0, 4, 5]}
-                customHeadCellClasses={[
-                  classes.textCenter,
-                  classes.textRight,
-                  classes.textRight
-                ]}
-                customHeadClassesForCells={[0, 4, 5]}
+                }))}
               />
 
 
@@ -120,4 +108,14 @@ class FundedCampaign extends React.Component {
   }
 }
 
-export default withStyles(style)(FundedCampaign);
+function mapStateToProps(state) {
+  return {
+    user_funded: state.user_funded
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({fetchFundedCampaign}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(style)(FundedCampaign));

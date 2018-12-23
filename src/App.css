@@ -63,6 +63,13 @@
     background-color: #263238 !important;
 }
 
+.dashboard-body{
+    height: auto;
+    margin: 0;
+    padding: 0;
+    max-height: fit-content;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

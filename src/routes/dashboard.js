@@ -5,7 +5,7 @@ import Person from "@material-ui/icons/Person";
 
 // core components/views
 import DashboardPage from "views/UserDashboard/UserDashboard.jsx";
-import UserProfile from "containers/UserProfile";
+import UserProfile from "views/UserDashboard/UserProfile/containers/UserProfile";
 import UserCampaign from "views/UserDashboard/UserCampaign/UserCampaignSections";
 
 const spliLink = window.location.pathname.split('/')[2];

@@ -5,8 +5,12 @@ import GridItem from "components/Grid/GridItem.jsx";
 import Grid from "@material-ui/core/Grid/Grid";
 import withStyles from "@material-ui/core/styles/withStyles";
 import UserCampaignSection from "./UserCampaign/UserCampaignSections";
-import UserProfile from "../../containers/UserProfile";
+import UserProfile from "./UserProfile/containers/UserProfile";
 import Alert from "./Alert/Alert";
+import {bindActionCreators} from "redux";
+import fetchUserDashboard from "../../actions/dashboard";
+import connect from "react-redux/es/connect/connect";
+import { PATH_BASE } from "../../constants";
 
 const styles = {
   cardCategoryWhite: {
@@ -34,10 +38,13 @@ const styles = {
 
 class UserDashboard extends React.Component{
 
-  async componentWillMount() {
+  async componentDidMount() {
+    const { match } = this.props;
+    const id = match.params.id;
+    this.props.fetchUserDashboard();
     axios.defaults.headers.common['Authorization'] = localStorage.getItem('id_token');
     try{
-      const res = await axios.get('/api/v1/user/:id/dashboard');
+      const res = await axios.get(`${ PATH_BASE }/api/v1/user/${id}`);
       this.setState({ dashboard: res.data });
     }catch (error) {
       if(error.response.status === 401 || 304) {
@@ -47,7 +54,8 @@ class UserDashboard extends React.Component{
   }
 
   render(){
-    const { classes } = this.props;
+    // console.log(this.state.dashboard, 'USER DASH')
+    const { classes, match, user_dashboard } = this.props;
     const alertUser = false;
     const showAlert = alertUser ? null : <Alert/>;
     return(
@@ -56,11 +64,11 @@ class UserDashboard extends React.Component{
           {showAlert}
           <GridContainer>
             <Grid container>
-              <GridItem xs={4} sm={4} md={4}>
-                <UserProfile/>
+              <GridItem xs={12} sm={12} md={4}>
+                <UserProfile id={match.params.id} user_info={user_dashboard[0]}/>
               </GridItem>
-              <GridItem xs={8} sm={8} md={8}>
-                <UserCampaignSection/>
+              <GridItem xs={12} sm={12} md={8}>
+                <UserCampaignSection id={match.params.id} user_info={user_dashboard[0]}/>
               </GridItem>
             </Grid>
           </GridContainer>
@@ -70,4 +78,14 @@ class UserDashboard extends React.Component{
   }
 }
 
-export default withStyles(styles)(UserDashboard);
+function mapStateToProps(state) {
+  return {
+    user_dashboard: state.user_dashboard
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({fetchUserDashboard}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(UserDashboard));

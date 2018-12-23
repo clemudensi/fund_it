@@ -17,11 +17,33 @@ import style from "assets/jss/material-kit-pro-react/views/componentsSections/co
 import placeholder from "assets/img/placeholder.jpg";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
-import {bindActionCreators} from "redux";
-import fetchUser from "actions/users";
-import {connect} from "react-redux";
+import remove from "lodash/remove";
+import TextField from "@material-ui/core/TextField/TextField";
+import forEach from "lodash/forEach";
+import selectMenu from "./selectMenu";
+import Accordion from "components/Accordion/Accordion";
+import map from "lodash/map";
+import Close from "@material-ui/icons/Close";
+import { PATH_BASE } from "../../../../constants";
+
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+  },
+  dense: {
+    marginTop: 16,
+  },
+  menu: {
+    width: 400,
+  },
+});
+
 
 class UpdateCampaignForm extends React.Component {
   constructor(props) {
@@ -34,11 +56,8 @@ class UpdateCampaignForm extends React.Component {
       campaign_description: campaign.campaign_description,
       campaign_amount: campaign.campaign_amount,
       campaign_duration: campaign.campaign_duration,
+      campaign_funds: []
     };
-  }
-
-  componentDidMount(){
-    this.props.fetchUser();
   }
 
   handleTitle = e => {
@@ -49,20 +68,88 @@ class UpdateCampaignForm extends React.Component {
     this.setState({campaign_description: e.target.value});
   };
 
-  handleAmount = e => {
-    this.setState({campaign_amount: e.target.value});
-  };
-
   handleDuration = e => {
     this.setState({campaign_duration: e.target.value});
   };
 
-  handleSimple = e => {
-    this.setState({ [e.target.name]: e.target.value });
-    this.setState({campaignOwner_id: this.props.user_login.user});
+  handleFundAmount = e => {
+    this.setState({fund_amount: e.target.value});
   };
 
-  uploadWidget = () =>{
+  handleFundPurpose = e => {
+    this.setState({fund_purpose: e.target.value});
+  };
+
+  handleCashFunds = () => {
+    this.cashFunds(this.state.fund_amount, this.state.fund_purpose);
+  };
+
+  handleOtherFunds = () => {
+    this.otherFunds(this.state.fund_type, this.state.fund_description);
+  };
+
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    });
+  };
+
+  cashFunds(amount, purpose, title) {
+    title = `Cash funds of ${amount}`;
+    if(amount && purpose){
+      this.props.campaign.campaign_funds.push({
+        amount,
+        purpose,
+        title,
+      });
+
+      this.setState((prevState) => ({ campaign_funds: prevState.campaign_funds }));
+    }
+  }
+
+  otherFunds(type, purpose, title){
+    title = `Request for an Item (${type})`;
+    if(type && purpose) {
+      this.props.campaign.campaign_funds.push({
+        type,
+        purpose,
+        title
+      });
+      this.setState((prevState) => ({ campaign_funds: prevState.campaign_funds }));
+    }
+  }
+
+  handleFundDescription = e => {
+    this.setState({fund_description: e.target.value});
+  };
+
+  handleFundType = e => {
+    this.setState({fund_type: e.target.value});
+  };
+
+  handleCampaignType = e => {
+    this.setState({ campaign_type: e.target.value });
+  };
+
+  deleteFundItem (key) {
+    const amount = this.state.campaign_funds[key].amount;
+    remove(this.state.campaign_funds, fund => fund.amount === amount);
+    this.setState((prevState) => ({ campaign_funds: prevState.campaign_funds }))
+  };
+
+  deleteFundItemEdit (key) {
+    const amount = this.props.campaign.campaign_funds[key].amount;
+    remove(this.props.campaign.campaign_funds, fund => fund.amount === amount);
+    this.setState((prevState) => ({ campaign_funds: prevState.campaign_funds }))
+  };
+
+  deleteFundType (key) {
+    const type = this.state.campaign_funds[key].type;
+    remove(this.state.campaign_funds, fund => fund.type === type);
+    this.setState((prevState) => ({ campaign_funds: prevState.campaign_funds }))
+  };
+
+  uploadWidget = () => {
     window.cloudinary.openUploadWidget({ cloud_name: 'fundit-app', upload_preset: 'fua6wfmh', tags:['fundit']},
       (error, result) => {
         try {
@@ -77,58 +164,82 @@ class UpdateCampaignForm extends React.Component {
       });
   };
 
-  handleFormSubmit = async e => {
+  handleFormSubmit = async (e) => {
     e.preventDefault();
-    const {
-      campaignOwner_id,
-      campaign_type,
-      campaign_title,
-      campaign_description,
-      campaign_amount,
-      campaign_duration,
-      campaign_image
-    } = this.state;
-    const user_id = this.state.campaignOwner_id;
+    if (this.state.campaign_description.length >= 300){
 
-    try {
-      return await axios.put(`/api/v1/user/${user_id}/campaign/:id`, {
+      const { id } = this.props;
+      const campaign_funds = this.props.campaign.campaign_funds;
+      const campaign_image = this.state.campaign_image ? this.state.campaign_image : this.props.campaign.campaign_image;
+      const campaign_duration = new Date(new Date().getTime()+(this.state.campaign_duration*24*60*60*1000));
+      const {
         campaignOwner_id,
         campaign_type,
         campaign_title,
         campaign_description,
-        campaign_amount,
-        campaign_duration,
-        campaign_image
-      })
-    } catch (err) {
-      return err
+        // campaign_duration,
+      } = this.state;
+
+      try {
+        const res = await axios.put(`${PATH_BASE}/api/v1/campaign/${id}`, {
+          campaignOwner_id,
+          campaign_type,
+          campaign_title,
+          campaign_description,
+          campaign_duration,
+          campaign_image,
+          campaign_funds
+        });
+        if (res.status === 200) window.location.reload();
+      } catch (e) {
+        return e
+      }
+    } else{
+      this.setState({ chr_length: 'The campaign description is less than 300 characters'})
     }
   };
 
+  clearCashFunds = () =>{
+    this.setState({
+      fund_amount: '',
+      fund_purpose: ''
+    });
+  };
+
+  clearOtherFunds = () =>{
+    this.setState({
+      fund_description: '',
+      fund_type: ''
+    });
+  };
+
   render() {
-    const { classes, campaign} = this.props;
+    const campaign_funds = this.props.campaign.campaign_funds.map( funds => funds);
+    const buttonFloat = {float: 'right'};
+    const { classes} = this.props;
     const {
       campaign_title,
       campaign_description,
-      campaign_amount,
       campaign_duration,
+      fund_amount,
+      fund_description,
+      fund_type,
+      fund_purpose
     } = this.state;
-    const topPadding = {paddingTop: 30};
     return (
       <div className={classes.main}>
-        <h2 className={classes.title} align="center" style={topPadding}>Update {campaign.campaign_title} Campaign</h2>
         <div className={classes.space20} />
         <div id="comments">
           <GridContainer>
             <GridItem
               xs={12}
-              sm={8}
-              md={8}
+              sm={10}
+              md={10}
             >
-              <form className={classes.form} onSubmit={this.handleFormSubmit}>
+              <form className={classes.form} onSubmit={this.handleFormSubmit} >
                 <Media
                   title={<div>
-                    <Button round onClick={this.uploadWidget} >
+                    <Button round onClick={this.uploadWidget} size="sm">
                       Upload Image
                     </Button>
                     <h4>{this.state.fileName}.{this.state.format}</h4>
@@ -137,32 +248,40 @@ class UpdateCampaignForm extends React.Component {
                   avatar={placeholder}
                   body={
                     <div>
+
+                      {/*Campaign Title*/}
                       <GridContainer>
                         <GridItem xs={12} sm={6} md={6}>
-                          <CustomInput
-                            formControlProps={{
-                              fullWidth: true
-                            }}
-                            inputProps={{
-                              value: campaign_title,
-                              onChange: this.handleTitle,
-                              placeholder: "Campaign Title"
-                            }}
+                          <TextField
+                            required
+                            fullWidth
+                            value={campaign_title}
+                            // id="outlined-number"
+                            label="Campaign Title"
+                            onChange={this.handleTitle}
+                            placeholder="Campaign Title"
+                            // type="number"
+                            className={classes.textField}
+                          />
+
+                        </GridItem>
+
+                        {/*Campaign Duration*/}
+                        <GridItem xs={12} sm={6} md={6}>
+                          <TextField
+                            required
+                            fullWidth
+                            value={campaign_duration}
+                            label="Campaign Duration"
+                            onChange={this.handleChange('campaign_duration')}
+                            placeholder="Duration in days (0 - 45 )"
+                            type="number"
+                            className={classes.textField}
                           />
                         </GridItem>
-                        <GridItem xs={12} sm={6} md={6}>
-                          <CustomInput
-                            formControlProps={{
-                              fullWidth: true
-                            }}
-                            inputProps={{
-                              value: campaign_duration,
-                              onChange: this.handleDuration,
-                              placeholder: "Duration (0 - 45 days)"
-                            }}
-                          />
-                        </GridItem>
-                        <GridItem xs={12} sm={6} md={6}>
+
+                        {/*Select Campaign Category*/}
+                        <GridItem xs={12} sm={12} md={12}>
                           <FormControl
                             fullWidth
                             className={classes.selectFormControl}>
@@ -179,61 +298,175 @@ class UpdateCampaignForm extends React.Component {
                                 select: classes.select
                               }}
                               value={this.state.campaign_type}
-                              onChange={this.handleSimple}
+                              onChange={this.handleCampaignType}
                               inputProps={{
                                 name: "campaign_type",
                                 id: "simple-select"
                               }}>
-                              <MenuItem
-                                disabled
-                                classes={{
-                                  root: classes.selectMenuItem
-                                }}>
-                                Category
-                              </MenuItem>
-                              <MenuItem
-                                classes={{
-                                  root: classes.selectMenuItem,
-                                  selected: classes.selectMenuItemSelected
-                                }}
-                                value="Charity">
-                                Charity
-                              </MenuItem>
-                              <MenuItem
-                                classes={{
-                                  root: classes.selectMenuItem,
-                                  selected: classes.selectMenuItemSelected
-                                }}
-                                value="Enterprise">
-                                Enterprise
-                              </MenuItem>
-                              <MenuItem
-                                classes={{
-                                  root: classes.selectMenuItem,
-                                  selected: classes.selectMenuItemSelected
-                                }}
-                                value="Gifts">
-                                Gifts
-                              </MenuItem>
+                              {forEach(selectMenu(classes.selectMenuItem, classes.selectMenuItemSelected),
+                                (item, key) => <div key={key}>{item}</div>)}
                             </Select>
                           </FormControl>
                         </GridItem>
                       </GridContainer>
+
+                      {/*Funding Options Starts*/}
                       <GridContainer>
-                        <GridItem xs={12} sm={6} md={6}>
-                          <CustomInput
-                            id="not-logged-name"
-                            formControlProps={{
-                              fullWidth: true
-                            }}
-                            inputProps={{
-                              value: campaign_amount,
-                              onChange: this.handleAmount,
-                              placeholder: "Amount in digits e.g(5000)"
-                            }}
+                        <GridItem xs={12} sm={12} md={12}>
+                          <Accordion
+                            // active={0}
+                            activeColor="info"
+                            collapses={[
+                              {
+                                title: "Cash funding",
+                                content: (
+                                  <div>
+                                    <GridContainer>
+                                      {/*Item Output*/}
+                                      <GridItem  xs={12} sm={12} md={12}>
+                                        <div align="center" className={classes.container}>
+                                          { map(campaign_funds, (funding, key) => funding.amount ?  <div key={key} align="center">
+                                            <p>{funding.amount} {funding.purpose} <span><Button
+                                              simple justIcon size="sm"
+                                              color="danger"
+                                              onClick={() => this.deleteFundItemEdit(key)}
+                                              style={{textAlign: 'right', marginTop: 2}}
+                                            >
+                                                <Close color='error'/>
+                                              </Button></span></p>
+
+                                          </div> : null)}
+                                          {map(this.state.campaign_funds, (funding, key) => funding.amount ? <div key={key} align="center">
+                                              <p>{funding.amount} {funding.purpose} <span><Button
+                                                simple justIcon size="sm"
+                                                color="danger"
+                                                onClick={() => this.deleteFundItem(key)}
+                                                style={{textAlign: 'right', marginTop: 2}}
+                                              >
+                                                <Close color='error'/>
+                                              </Button></span></p>
+
+                                            </div> : null
+                                          )}
+                                        </div>
+                                      </GridItem>
+
+                                      {/*Fund Amount*/}
+                                      <GridItem xs={12} sm={4} md={4}>
+                                        <TextField
+                                          // required
+                                          fullWidth
+                                          value={fund_amount}
+                                          label="Cash Funds"
+                                          onChange={this.handleFundAmount}
+                                          placeholder="Amount in digits e.g 5000"
+                                          type="number"
+                                          className={classes.textField}
+                                          style={{paddingTop: 12}}
+                                        />
+                                      </GridItem>
+
+                                      {/* Funding Description*/}
+                                      <GridItem xs={12} sm={8} md={8}>
+                                        <CustomInput
+                                          formControlProps={{
+                                            fullWidth: true
+                                          }}
+                                          inputProps={{
+                                            value: fund_purpose,
+                                            onChange: this.handleFundPurpose,
+                                            placeholder: "Funding Description"
+                                          }}
+                                        />
+                                      </GridItem>
+                                    </GridContainer>
+                                    <Button color="info" round size="sm"
+                                      onClick={()=> { this.handleCashFunds(); this.clearCashFunds(); }}
+                                      style={buttonFloat}>
+                                      Add
+                                    </Button>
+                                  </div>
+                                )
+                              },
+                              {
+                                title: "Other types of funding",
+                                content: (
+                                  <div>
+                                    <GridContainer>
+                                      {/*Funding Type*/}
+                                      <GridItem xs={12} sm={12} md={12}>
+                                        <div align="center" className={classes.container}>
+                                          {map(campaign_funds, (funding, key) => funding.type ? <div key={key} align="center">
+                                              <p>{funding.type} {funding.description} <span><Button
+                                                simple justIcon size="sm"
+                                                color="danger"
+                                                onClick={() => this.deleteFundType(key)}
+                                                className={classes.floatRight}
+                                                style={{textAlign: 'right', marginTop: 2}}
+                                              >
+                                                <Close />
+                                              </Button></span></p>
+                                            </div> : null
+                                          )}
+                                          {map(this.state.campaign_funds, (funding, key) => funding.type ? <div key={key} align="center">
+                                              <p>{funding.type} {funding.description} <span><Button
+                                                simple justIcon size="sm"
+                                                color="danger"
+                                                onClick={() => this.deleteFundType(key)}
+                                                className={classes.floatRight}
+                                                style={{textAlign: 'right', marginTop: 2}}
+                                              >
+                                                <Close />
+                                              </Button></span></p>
+                                            </div> : null
+                                          )}
+                                        </div>
+                                      </GridItem>
+
+                                      <GridItem xs={12} sm={4} md={4}>
+                                        <CustomInput
+                                          formControlProps={{
+                                            fullWidth: true
+                                          }}
+                                          inputProps={{
+                                            value: fund_type,
+                                            onChange: this.handleFundType,
+                                            placeholder: "Type e.g Bus"
+                                          }}
+                                        />
+                                      </GridItem>
+
+                                      {/*Funding Description*/}
+                                      <GridItem xs={12} sm={8} md={8}>
+                                        <CustomInput
+                                          formControlProps={{
+                                            fullWidth: true
+                                          }}
+                                          inputProps={{
+                                            value: fund_description,
+                                            onChange: this.handleFundDescription,
+                                            placeholder: "Funding Description"
+                                          }}
+                                        />
+                                      </GridItem>
+                                    </GridContainer>
+                                    <Button
+                                      color="info" round size="sm"
+                                      onClick={()=> { this.handleOtherFunds(); this.clearOtherFunds(); }}
+                                      style={buttonFloat}>
+                                      Add
+                                    </Button>
+                                  </div>
+                                )
+                              }
+                            ]}
                           />
                         </GridItem>
                       </GridContainer>
+                      {/*Funding option ends*/}
+
+                      {/*Campaign Description*/}
+                      <p style={{ color: '#FF0000'}}>{this.state.chr_length}</p>
                       <CustomInput
                         id="not-logged-message"
                         formControlProps={{
@@ -244,6 +477,7 @@ class UpdateCampaignForm extends React.Component {
                           onChange: this.handleDescription,
                           multiline: true,
                           rows: 6,
+                          minLength: 300,
                           placeholder: "Campaign Description"
                         }}
                       />
@@ -252,9 +486,9 @@ class UpdateCampaignForm extends React.Component {
                   footer={
                     <div className={classes.signInButton}>
                       <Button type="submit" color="info" className={classes.floatRight} round>
-                        Send
+                        Update
                       </Button>
-                      <Button color="rose" className={classes.floatLeft} round onClick={this.props.onCancelEdit}>
+                      <Button color="info" className={classes.floatLeft} round onClick={this.props.onCancelEdit}>
                         Cancel
                       </Button>
                     </div>
@@ -269,14 +503,4 @@ class UpdateCampaignForm extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    user_login: state.user_login
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({fetchUser}, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(style)(UpdateCampaignForm));
+export default withStyles(styles)(UpdateCampaignForm);

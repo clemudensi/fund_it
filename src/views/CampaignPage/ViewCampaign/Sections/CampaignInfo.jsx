@@ -4,7 +4,7 @@ import NavPills from "components/NavPills/NavPills.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import Add from "@material-ui/icons/Add"
 import map from 'lodash/map'
-import AddComments from "./AddComments/AddComments";
+import AddComments from "../../AddComments/AddComments";
 import withStyles from "@material-ui/core/styles/withStyles";
 import style from "assets/jss/material-kit-pro-react/views/componentsSections/contentAreas";
 

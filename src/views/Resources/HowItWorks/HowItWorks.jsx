@@ -7,18 +7,18 @@ import VerifiedUser from "@material-ui/icons/VerifiedUser";
 import Fingerprint from "@material-ui/icons/Fingerprint";
 import AttachMoney from "@material-ui/icons/AttachMoney";
 // core components
-import GridContainer from "components/Grid/GridContainer.jsx";
-import GridItem from "components/Grid/GridItem.jsx";
-import InfoArea from "components/InfoArea/InfoArea.jsx";
+import GridContainer from "../../../components/Grid/GridContainer.jsx";
+import GridItem from "../../../components/Grid/GridItem.jsx";
+import InfoArea from "../../../components/InfoArea/InfoArea.jsx";
 
-import featuresStyle from "assets/jss/material-kit-pro-react/views/sectionsSections/featuresStyle.jsx";
+import featuresStyle from "../../../assets/jss/material-kit-pro-react/views/sectionsSections/featuresStyle.jsx";
 
-import iphone from "assets/img/sections/iphone.png";
-import iphone2 from "assets/img/sections/iphone2.png";
-import bg9 from "assets/img/bg9.jpg";
+import iphone from "../../../assets/img/sections/iphone.png";
+import iphone2 from "../../../assets/img/sections/iphone2.png";
+import bg9 from "../../../assets/img/bg9.jpg";
 import Link from "react-router-dom/es/Link";
 
-function SectionFeatures({ ...props }) {
+function HowItWorks({ ...props }) {
   const { classes, ...rest } = props;
   return (
     <div className="cd-section" {...rest}>
@@ -93,4 +93,4 @@ Let the crowd invest in your company along with (or instead of) traditional inve
   );
 }
 
-export default withStyles(featuresStyle)(SectionFeatures);
+export default withStyles(featuresStyle)(HowItWorks);

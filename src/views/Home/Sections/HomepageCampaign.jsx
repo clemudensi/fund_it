@@ -1,5 +1,5 @@
 import React from "react";
-
+import axios from 'axios';
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // @material-ui/icons
@@ -22,7 +22,7 @@ import cardBlog2 from "assets/img/examples/card-blog2.jpg";
 import blog8 from "assets/img/examples/blog8.jpg";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import fetchAllCampaign from "../../../actions/allCampaigns";
+import fetchAllCampaign from "actions/allCampaigns";
 import Link from "react-router-dom/es/Link";
 import omit from 'lodash/omit';
 import map from 'lodash/map';
@@ -40,7 +40,7 @@ class Campaigns extends React.Component {
     };
   }
 
-  componentDidMount(){
+  componentWillMount(){
     this.props.fetchAllCampaign();
   }
 
@@ -55,9 +55,13 @@ class Campaigns extends React.Component {
   };
 
   onClickFollow = () => {
+    const { match } = this.props;
+    const { follow } = this.state
+    const campaignId = match.params.id;
     this.setState((prevState) =>
       ({ follow: !prevState.follow })
     );
+    axios.patch(`https://xvtebyxo60.execute-api.us-east-1.amazonaws.com/dev/api/v1/user/:id/follow`, campaignId, follow, )
   };
 
   renderCampaign(){

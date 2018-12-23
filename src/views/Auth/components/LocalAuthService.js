@@ -1,27 +1,29 @@
 import decode from 'jwt-decode';
 import axios from "axios";
+import { PATH_BASE } from "../../../constants";
+
 export default class LocalAuthService {
 
     login = async (email, password)  => {
-        const res = await axios.post('/api/v1/login', {
+        const res = await axios.post(`${PATH_BASE}/api/v1/login`, {
             email, password })
         localStorage.setItem('id_token', res.headers['x-auth-token']);
         return Promise.resolve(res);
     };
 
     async signup(firstName, lastName, email, password, terms_condition){
-        const res = await axios.post('/api/v1/signup',{
+        const res = await axios.post(`${PATH_BASE}/api/v1/signup`,{
             firstName, lastName, email, password, terms_condition
         });
-        localStorage.setItem('id_token', res.headers['x-Auth-token']);
+        localStorage.setItem('id_token', res.headers['x-auth-token']);
         return Promise.resolve(res);
     }
 
   async adminSignup(firstName, lastName, email, password, adminCode){
-    const res = await axios.post('/api/v1/admin/signup',{
+    const res = await axios.post(`${PATH_BASE}/api/v1/admin/signup`,{
       firstName, lastName, email, password, adminCode
     });
-    localStorage.setItem('id_token', res.headers['x-Auth-token']);
+    localStorage.setItem('id_token', res.headers['x-auth-token']);
     return Promise.resolve(res);
   }
 

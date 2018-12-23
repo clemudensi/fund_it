@@ -56,14 +56,36 @@ class UserProfile extends React.Component {
   };
 
   render(){
-    const padButton = {paddingTop: 30, paddingLeft: 20};
-    let showIndividual = this.state.showIndividual ? <AsyncIndividual cancelEdit={this.onClickCancel} id={this.props.id} /> : null;
-    let showOrganization = this.state.showOrganization ? <AsyncOrganization cancelEdit={this.onClickCancel} id={this.props.id}/> : null;
+    const padButton = {paddingTop: 150, paddingLeft: 20};
+    const showIndividual = this.state.showIndividual ?
+      <AsyncIndividual
+        cancelEdit={this.onClickCancel}
+        user_info={this.props.user_info}
+        id={this.props.id}
+      /> : null;
+    const showOrganization = this.state.showOrganization ?
+      <AsyncOrganization
+        cancelEdit={this.onClickCancel}
+        id={this.props.id}
+      /> : null;
     return (
       this.state.isEditing ?
         <div style={padButton}>
-          <Button onClick={this.renderIndividual} color="transparent" size="lg" round><Person/></Button>
-          <Button onClick={this.renderOrganization} color="transparent" size="lg" round><People/></Button>
+          <Button
+            onClick={this.renderIndividual}
+            color="transparent" size="lg"
+            round
+          >
+            <Person/>
+          </Button>
+          <Button
+            onClick={this.renderOrganization}
+            color="transparent"
+            size="lg"
+            round
+          >
+            <People/>
+          </Button>
           {/*<Button onClick={this.onClickCancel} color="transparent" size="sm" round>Cancel Edit</Button>*/}
           <div>
             {showIndividual}
@@ -71,7 +93,10 @@ class UserProfile extends React.Component {
           <div>
             {showOrganization}
           </div>
-        </div> : <AsyncShowProfile onClickEdit={this.onClickEdit}/>
+        </div> : <AsyncShowProfile
+          onClickEdit={this.onClickEdit}
+          // user_info={this.props.user_info}
+        />
 
 
     );

@@ -1,5 +1,5 @@
 import DashboardLayout from "../views/Unused/DashBoardPanel";
-import UserCampaign from "../views/UserDashboard/UserCampaign/Sections/UserCampaign";
+import UserCampaign from "../views/Unused/UserCampaign";
 import UserProfile from "../views/UserDashboard/UserProfile/UserProfile";
 
 let dashboard = [

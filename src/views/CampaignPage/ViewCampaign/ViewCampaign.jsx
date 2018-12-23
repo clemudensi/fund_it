@@ -8,15 +8,14 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Parallax from "components/Parallax/Parallax";
 import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
-import Accordion from "components/Accordion/Accordion";
 import Campaign from "views/Home/Sections/HomepageCampaign";
-import Button from "components/CustomButtons/Button.jsx";
 
 import productStyle from "assets/jss/material-kit-pro-react/views/productStyle";
-import CampaignInfo from "./CampaignInfo";
+import CampaignInfo from "./Sections/CampaignInfo";
 import {bindActionCreators} from "redux";
 import fetchViewCampaign from "actions/viewCampaign";
 import connect from "react-redux/es/connect/connect";
+import CampaignFundTypes from "./Sections/CampaignFundTypes";
 
 class ViewCampaign extends React.Component {
   constructor(props) {
@@ -33,8 +32,7 @@ class ViewCampaign extends React.Component {
     document.body.scrollTop = 0;
   }
   render() {
-    const { classes, view_campaign } = this.props;
-    const floatRight = {float: "right"};
+    const { classes, view_campaign, user_id, match } = this.props;
     return (
       <div className={classes.productPage}>
         <Parallax
@@ -55,57 +53,16 @@ class ViewCampaign extends React.Component {
                     info={view_campaign.campaign_description}
                     comments={view_campaign.comments}
                     funders={view_campaign.campaign_funds}
+                    user_id={user_id}
+                    campaign_id={match.params.id}
                   />
                 </GridItem>
                 <GridItem md={5} sm={12}>
-                  <h2 className={classes.title}>Ultimate Fund raiser</h2>
-                  <h3 className={classes.mainPrice}>Amount to be raise: <b>$5000</b></h3>
-                  <Accordion
-                    // active={0}
-                    activeColor="info"
-                    collapses={[
-                      {
-                        title: "Funding Type 1",
-                        content: (
-                          <div>
-                            <p>
-                              Funds of $500 from 10 individuals
-                            </p>
-                            <Button color="info" round onClick={this.onClickCancel} style={floatRight}>
-                              <a href={`/campaign/${view_campaign._id}/fund`}>fund</a>
-                            </Button>
-                          </div>
-                        )
-                      },
-                      {
-                        title: "Funding Type 2",
-                        content: (
-                         <div>
-                           <p>
-                             FMCG items
-                           </p>
-                           <Button color="info" round onClick={this.onClickCancel} style={floatRight}>
-                             fund
-                           </Button>
-                         </div>
-                        )
-                      },
-                      {
-                        title: "Funding Type 3",
-                        content: (
-                          <div>
-                            <ul>
-                              <li>
-                                A choice location in Ikeja
-                              </li>
-                            </ul>
-                            <Button color="info" round onClick={this.onClickCancel} style={floatRight}>
-                              fund
-                            </Button>
-                          </div>
-                        )
-                      }
-                    ]}
+
+                  <CampaignFundTypes
+                    campaign_funds={this.props.view_campaign.campaign_funds}
+                    id={this.props.view_campaign._id}
+                    title={this.props.view_campaign.campaign_title}
                   />
                 </GridItem>
               </GridContainer>

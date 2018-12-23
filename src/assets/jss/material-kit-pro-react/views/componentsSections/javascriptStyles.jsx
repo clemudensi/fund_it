@@ -31,6 +31,9 @@ const javascriptStyles = theme => ({
     minHeight: "32px",
     textDecoration: "none"
   },
+  floatRight: {
+    float: "right!important"
+  },
   icon: {
     width: "24px",
     height: "24px",

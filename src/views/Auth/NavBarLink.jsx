@@ -72,11 +72,11 @@ function HeaderLinks({ ...props }) {
 
       <ListItem className={classes.listItem}>
         <Button
-          href="#campaign"
+          href="/contact"
           className={classes.navLink}
           color="transparent"
         >
-          About Us
+          Contact Us
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
@@ -95,7 +95,7 @@ function HeaderLinks({ ...props }) {
           hoverColor={dropdownHoverColor}
           buttonText={
             <img
-              src={profileImage}
+              src={props.profile_image}
               className={classes.img}
               alt="profile"
             />

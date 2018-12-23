@@ -3,3 +3,7 @@ export const FETCH_ADMIN_LOGIN = 'fetch_admin_login';
 export const FETCH_USER_CAMPAIGN = 'fetch_user_campaign';
 export const FETCH_CAMPAIGN_VIEW = 'fetch_campaign_view';
 export const FETCH_ALL_CAMPAIGN = 'fetch_all_campaign';
+export const FETCH_USER_DASHBOARD = 'fetch_user_dashboard';
+export const FETCH_ALL_USERS = 'fetch_all_users';
+export const FETCH_APPROVAL_FUNDS = 'fetch_approval_funds';
+export const FETCH_USERFUNDED_CAMPAIGN = 'fetch-approval_funds';

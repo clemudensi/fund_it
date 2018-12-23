@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {FETCH_USER_LOGIN} from './types';
+import {PATH_BASE} from "../constants";
 
 export const fetchLoginSuccess = user_login => {
   return {
@@ -11,20 +12,19 @@ export const fetchLoginSuccess = user_login => {
 export default function fetchUsers() {
   axios.defaults.headers.common['Authorization'] = localStorage.getItem('id_token');
   return async (dispatch) => {
+    const token = localStorage.getItem('id_token');
     try {
-      if (window.location.pathname === '/') {
-        const user = await axios.get('/api/v1/user/:id/dashboard');
-        dispatch(fetchLoginSuccess(user.data));
-      }
-      if (window.location.pathname === '/admin/login') {
-        const user = await axios.get('/api/v1/admin/:id/dashboard');
+      if (token) {
+        const pathname = window.location.pathname.split( '/' );
+        const user = await axios.get(`${PATH_BASE}/api/v1/user/${pathname[2]}/dashboard`);
         dispatch(fetchLoginSuccess(user.data));
       }
     } catch (err) {
-      if(err.response.status === 401 || 304) {
+      if(err.status === 401 || 304) {
         // window.location.replace("/");
         return err
       }
     }
   }
 }
+

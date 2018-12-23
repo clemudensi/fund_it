@@ -1,9 +1,10 @@
 import React from "react";
+import AwesomeComponent from "./Spinner";
 
 export const MyLoadingComponent = ({isLoading, error}) => {
   // Handle the loading state
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div><AwesomeComponent/></div>;
   }
   // Handle the error state
   else if (error) {

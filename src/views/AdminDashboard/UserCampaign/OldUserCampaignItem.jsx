@@ -10,7 +10,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import style from "../../../assets/jss/material-kit-pro-react/views/componentsSections/contentAreas";
 import { PATH_BASE } from "../../../constants";
 
-class UserCampaignItem extends React.Component{
+class OldUserCampaignItem extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -86,4 +86,4 @@ class UserCampaignItem extends React.Component{
   }
 }
 
-export default withStyles(style)(UserCampaignItem);
+export default withStyles(style)(OldUserCampaignItem);

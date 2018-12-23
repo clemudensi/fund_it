@@ -19,10 +19,12 @@ class Organization extends React.Component{
       company_name: '',
       street: '',
       city: '',
+      state: '',
       zip_code: '',
       rc_code: '',
       industry: '',
       about_us: '',
+      completed: true,
       user_type: 'Organization',
     }
   }
@@ -37,6 +39,10 @@ class Organization extends React.Component{
 
   handleCity = e =>{
     this.setState({city: e.target.value});
+  };
+
+  handleState = e =>{
+    this.setState({state: e.target.value});
   };
 
   handleZipCode = e =>{
@@ -54,29 +60,34 @@ class Organization extends React.Component{
   handleAboutUs = e => {
     this.setState({about_us: e.target.value})
   };
+
   handleFormSubmit = async e => {
-    e.preventDefault()
+    e.preventDefault();
     const {
       company_name,
       street,
+      state,
       city,
       zip_code,
       rc_code,
       industry,
       user_type,
-      about_us
+      about_us,
+      completed
     } = this.state;
 
     try {
-      return await axios.put(`/api/v1/user/5b632e9c4a56d74944d18c2d`, {
+      return await axios.put(`/api/v1/user/${this.props.id}`, {
         company_name,
         street,
+        state,
         city,
         zip_code,
         rc_code,
         industry,
         user_type,
-        about_us
+        about_us,
+        completed
       });
     } catch (err) {
       return err
@@ -88,6 +99,7 @@ class Organization extends React.Component{
       company_name,
       street,
       city,
+      state,
       zip_code,
       rc_code,
       industry,
@@ -145,6 +157,20 @@ class Organization extends React.Component{
                         value: city,
                         onChange: this.handleCity,
                         placeholder: "City"
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <CustomInput
+                      labelText="State"
+                      id="postal-code"
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      inputProps={{
+                        value: state,
+                        onChange: this.handleState,
+                        placeholder: "State"
                       }}
                     />
                   </GridItem>

@@ -4,6 +4,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import map from 'lodash/map';
+import axios from 'axios';
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
@@ -17,15 +18,59 @@ import cardBlog4 from "assets/img/examples/card-blog4.jpg";
 import fetchUserCampaign from "actions/userCampaigns";
 import Grid from "@material-ui/core/Grid/Grid";
 import Button from "components/CustomButtons/Button";
+import { PATH_BASE } from "../../../../constants";
 
 class ShowAllUserCampaign extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      campaign_status: false,
+      campaign_enabled: false
+    }
+  }
 
   componentWillMount(){
     this.props.fetchUserCampaign();
   }
 
+  async publish(campaign_id){
+    const {campaign_status, campaign_enabled} = this.state;
+    try {
+      await axios.patch(`${PATH_BASE}/api/v1/campaign/${campaign_id}/publish`, {campaign_status, campaign_enabled})
+      window.location.reload()
+    } catch (err) {
+      return err
+    }
+  };
+
+  async withdraw(campaign_id){
+    const campaign_status = null;
+    const campaign_enabled = true;
+    try {
+      await axios.patch(`${PATH_BASE}/api/v1/campaign/${campaign_id}/withdraw`, { campaign_status, campaign_enabled })
+      window.location.reload()
+    } catch (err) {
+      return err
+    }
+  };
+
+  async deleteCampaign(campaign_id){
+    const {user_id} = this.props;
+    try {
+      const res = await axios.delete(
+        `${PATH_BASE}/api/v1/campaign/${ campaign_id }`, {user_id}
+      );
+      console.log(res.data);
+      if(res.data.success === true) window.location.reload();
+        } catch (err) {
+      return err
+    }
+  }
+
   render(){
+    console.log(user_campaign, 'User campaign')
     const { classes, user_campaign } = this.props;
+    // console.log(this.props.user_id, 'USer ID')
     return (
         map(user_campaign, (campaign, key) => <div className="cd-section" key={key} id={key}>
             <div className={classes.container}>
@@ -72,13 +117,31 @@ class ShowAllUserCampaign extends React.Component{
                         <h3>{campaign.campaign_amount}</h3></span>
                         </div>
                         <Grid container>
-                          <Button
-                            className={classes.mrAuto}
-                            color="info"
-                            onClick={()=> {this.props.onClickEdit(key)}}
-                            round
-                            size="sm">Edit</Button>
+                          { campaign.campaign_enabled ? <div>
+                            <Button
+                              className={classes.mrAuto}
+                              color="info"
+                              onClick={()=> {this.props.onClickEdit(key)}}
+                              round
+                              size="sm">Edit</Button>
+                            <Button
+                              className={classes.mrAuto}
+                              color="info"
+                              onClick={()=> {this.deleteCampaign(campaign._id)}}
+                              round
+                              size="sm">Delete</Button>
+                          </div>: null }
                         </Grid>
+                        {campaign.campaign_status === null ?
+                          <Button color="info" round onClick={()=>this.publish(campaign._id)} className={classes.floatRight} type="submit">
+                            Publish
+                          </Button> : <div>
+                            <Button color="secondary" round size="sm">Pending...</Button>
+                            <Button
+                              onClick={()=>this.withdraw(campaign._id)}
+                              color="info" round
+                              className={classes.floatRight} >Withdraw</Button>
+                          </div>}
                       </GridItem>
                     </GridContainer>
                   </Card>

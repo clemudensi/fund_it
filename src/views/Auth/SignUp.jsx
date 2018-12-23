@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios';
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import Slide from "@material-ui/core/Slide";
@@ -25,6 +26,7 @@ import CustomInput from "components/CustomInput/CustomInput.jsx";
 import javascriptStyles from "assets/jss/material-kit-pro-react/views/componentsSections/javascriptStyles.jsx";
 import LocalAuthService from "./components/LocalAuthService";
 import Person from "@material-ui/icons/Person";
+import{ PATH_BASE } from "../../constants";
 
 function Transition(props) {
   return <Slide direction="down" {...props} />;
@@ -95,6 +97,8 @@ class Singup extends React.Component {
     const { firstName, lastName, email, password, terms_condition } = this.state;
     const res = await this.Auth.signup(firstName, lastName, email, password, terms_condition);
     if( res.data.token){
+      const user_id = res.data._id;
+      axios.post(`${PATH_BASE}/api/v1/user-info/new`, { user_id} );
       window.location.replace(`/user/${res.data._id}/dashboard`);
     }
   };

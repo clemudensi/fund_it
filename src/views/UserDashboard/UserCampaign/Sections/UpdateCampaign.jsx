@@ -6,7 +6,10 @@ class UpdateCampaign extends React.Component {
   render(){
     const { user_campaign, id } = this.props;
     const campaignArr = map(user_campaign, (campaign, key) => <UpdateCampaignForm
-      campaign={campaign} onCancelEdit={this.props.onCancelEdit} key={key} />);
+      campaign={campaign} onCancelEdit={this.props.onCancelEdit} key={key} id={campaign._id}
+      />
+    );
+
     const updateCampaign = campaignArr.find(campaign => campaign.key === `${id}`);
     return(
       <div>
