@@ -12,8 +12,6 @@ import Accordion from "components/Accordion/Accordion";
 import Campaign from "views/Home/Sections/HomepageCampaign";
 import Button from "components/CustomButtons/Button.jsx";
 
-import Image1 from 'assets/img/examples/card-blog2.jpg';
-
 import productStyle from "assets/jss/material-kit-pro-react/views/productStyle";
 import CampaignInfo from "./CampaignInfo";
 import {bindActionCreators} from "redux";
@@ -35,8 +33,7 @@ class ViewCampaign extends React.Component {
     document.body.scrollTop = 0;
   }
   render() {
-    console.log(this.props.view_campaign, 'User props in Campaign PAge')
-    const { classes } = this.props;
+    const { classes, view_campaign } = this.props;
     const floatRight = {float: "right"};
     return (
       <div className={classes.productPage}>
@@ -52,11 +49,15 @@ class ViewCampaign extends React.Component {
           <div className={classes.container}>
             <div className={classNames(classes.main, classes.mainRaised)}>
               <GridContainer>
-                <GridItem md={7} sm={4}>
-                  <img src={Image1} alt="Campaign" style={{width: 580, height: 350}} />
-                  <CampaignInfo/>
+                <GridItem md={7} sm={12}>
+                  <img src={view_campaign.campaign_image} alt="Campaign" style={{width: 580, height: 350}} />
+                  <CampaignInfo
+                    info={view_campaign.campaign_description}
+                    comments={view_campaign.comments}
+                    funders={view_campaign.campaign_funds}
+                  />
                 </GridItem>
-                <GridItem md={5} sm={4}>
+                <GridItem md={5} sm={12}>
                   <h2 className={classes.title}>Ultimate Fund raiser</h2>
                   <h3 className={classes.mainPrice}>Amount to be raise: <b>$5000</b></h3>
                   <Accordion
@@ -71,7 +72,7 @@ class ViewCampaign extends React.Component {
                               Funds of $500 from 10 individuals
                             </p>
                             <Button color="info" round onClick={this.onClickCancel} style={floatRight}>
-                              fund
+                              <a href={`/campaign/${view_campaign._id}/fund`}>fund</a>
                             </Button>
                           </div>
                         )

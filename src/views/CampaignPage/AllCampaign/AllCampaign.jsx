@@ -20,7 +20,7 @@ import cardBlog2 from "assets/img/examples/card-blog2.jpg";
 
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import fetchAllCampaign from "actions/allCampaigns";
+import fetchAllCampaign from "../../actions/allCampaigns";
 import Link from "react-router-dom/es/Link";
 import omit from 'lodash/omit';
 import map from 'lodash/map';
@@ -38,7 +38,7 @@ class Campaigns extends React.Component {
     };
   }
 
-  componentDidMount(){
+  componentWillMount(){
     this.props.fetchAllCampaign();
   }
 
@@ -60,6 +60,7 @@ class Campaigns extends React.Component {
   };
 
   renderCampaign(){
+    console.log(this.props.all_campaign, 'All Camp')
     const { classes, all_campaign } = this.props;
     return(
       map(all_campaign, (campaign, key) => <GridItem md={4} sm={4} className={`${classes.mlAuto} ${classes.mrAuto} ${

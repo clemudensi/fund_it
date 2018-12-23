@@ -57,13 +57,13 @@ class UserProfile extends React.Component {
 
   render(){
     const padButton = {paddingTop: 30, paddingLeft: 20};
-    let showIndividual = this.state.showIndividual ? <AsyncIndividual cancelEdit={this.onClickCancel} /> : null;
-    let showOrganization = this.state.showOrganization ? <AsyncOrganization cancelEdit={this.onClickCancel}/> : null;
+    let showIndividual = this.state.showIndividual ? <AsyncIndividual cancelEdit={this.onClickCancel} id={this.props.id} /> : null;
+    let showOrganization = this.state.showOrganization ? <AsyncOrganization cancelEdit={this.onClickCancel} id={this.props.id}/> : null;
     return (
       this.state.isEditing ?
         <div style={padButton}>
-          <Button onClick={this.renderIndividual} color="transparent" size="sm" round><Person/></Button>
-          <Button onClick={this.renderOrganization} color="transparent" size="sm" round><People/></Button>
+          <Button onClick={this.renderIndividual} color="transparent" size="lg" round><Person/></Button>
+          <Button onClick={this.renderOrganization} color="transparent" size="lg" round><People/></Button>
           {/*<Button onClick={this.onClickCancel} color="transparent" size="sm" round>Cancel Edit</Button>*/}
           <div>
             {showIndividual}
