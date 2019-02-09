@@ -2,10 +2,10 @@ import React from "react";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // @material-ui/icons
-import Chat from "@material-ui/icons/Chat";
+import Connect from "@material-ui/icons/GpsFixed";
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
-import Fingerprint from "@material-ui/icons/Fingerprint";
-import AttachMoney from "@material-ui/icons/AttachMoney";
+import Business from "@material-ui/icons/Business";
+import Group from "@material-ui/icons/Group";
 // core components
 import GridContainer from "../../../components/Grid/GridContainer.jsx";
 import GridItem from "../../../components/Grid/GridItem.jsx";
@@ -42,7 +42,7 @@ function Equity({ ...props }) {
             <GridItem xs={12} sm={4} md={4}>
               <InfoArea
                 vertical
-                icon={Chat}
+                icon={Connect}
                 title="Get exposed to an investor network"
                 description="
 Make connections with enthusiastic investors—and benefit from their dedication as well as their investment."
@@ -62,7 +62,7 @@ Make connections with enthusiastic investors—and benefit from their dedication
             <GridItem xs={12} sm={4} md={4}>
               <InfoArea
                 vertical
-                icon={Fingerprint}
+                icon={Business}
                 title="Do business your way"
                 description="
 Keep creative control of your company while getting assistance from a passionate community."
@@ -72,11 +72,11 @@ Keep creative control of your company while getting assistance from a passionate
             <GridItem xs={12} sm={4} md={4}>
               <InfoArea
                 vertical
-                icon={AttachMoney}
+                icon={Group}
                 title="Team up with experts"
                 description="
 We’re leaders in the crowdfunding and investing space who’ve helped thousands of companies get off the ground."
-                iconColor="danger"
+                iconColor="primary"
               />
               {/*<Link to={`/apply-for-equity`}>Apply for  Equity</Link>*/}
             </GridItem>

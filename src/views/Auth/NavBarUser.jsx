@@ -8,7 +8,7 @@ import Header from "components/Header/Header";
 import NavBarLink from "views/Auth/NavBarLink";
 
 import sectionsPageStyle from "assets/jss/material-kit-pro-react/views/sectionsPageStyle";
-import FundIt from "../../assets/img/fundit-logo.png";
+import FundIt from "../../assets/img/fund.jpg";
 
 class NavBar extends React.Component {
 

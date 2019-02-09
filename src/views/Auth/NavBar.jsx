@@ -6,7 +6,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 // core components
 import Header from "components/Header/Header";
 import HeaderLinks from "components/Header/HeaderLinks";
-import FundIt from 'assets/img/fundit-logo.png'
+import FundIt from "../../assets/img/fund.jpg";
 
 import sectionsPageStyle from "assets/jss/material-kit-pro-react/views/sectionsPageStyle";
 
@@ -17,7 +17,7 @@ class NavBar extends React.Component {
       <div>
         <Header
           color="dark"
-          brand={<img src={FundIt}/>}
+          brand={<img src={FundIt} alt={'fund-it'}/>}
           links={<HeaderLinks dropdownHoverColor="info" />}
           fixed
           changeColorOnScroll={{

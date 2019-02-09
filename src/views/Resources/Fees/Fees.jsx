@@ -33,7 +33,7 @@ class SectionPills extends React.Component {
             <GridContainer>
               <GridItem xs={12} sm={12} md={12} lg={12}>
                 <NavPills
-                  color="primary"
+                  color="info"
                   horizontal={{
                     tabsGrid: { xs: 12, sm: 3, md: 4 },
                     contentGrid: { xs: 12, sm: 9, md: 8 }

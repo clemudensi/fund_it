@@ -45,6 +45,26 @@ const AsyncFees = Loadable({
   loading: MyLoadingComponent
 });
 
+const AsyncResourceCenter = Loadable({
+  loader: () => import('views/Resources/ResourceCenter/Resources'),
+  loading: MyLoadingComponent
+});
+
+const AsyncAboutUs = Loadable({
+  loader: () => import('views/Resources/About/AboutUs'),
+  loading: MyLoadingComponent
+});
+
+const AsyncStartCamapign = Loadable({
+  loader: () => import('views/Resources/Start-a-Campaign/Start-a-Campaign'),
+  loading: MyLoadingComponent
+});
+
+// const AsyncEquity = Loadable({
+//   loader: () => import('views/Resources/Equity/Equity'),
+//   loading: MyLoadingComponent
+// });
+
 let indexRoute = [
   {path: '/user/:id/dashboard', name: 'Dashboard', component: AsyncUserDashboard },
   {path: '/admin/:id/dashboard', name: 'Admin Dashboard', component: AsyncAdminDashboard },
@@ -54,8 +74,12 @@ let indexRoute = [
   {path: '/forgot-pass', name: 'Forgot Password', component: AsyncForgotPass},
   {path: '/resources/how-it-works', name: 'How It Works', component: AsyncHowItWorks},
   {path: '/resources/fees', name: 'How It Works', component: AsyncFees},
+  {path: '/resources/center', name: 'Resources', component: AsyncResourceCenter},
   {path: '/resources/apply-for-equity', name: 'Equity', component: AsyncEquity},
   {path: '/policy', name: 'Policy', component: AsyncPolicy},
+  // {path: '/equity', name: 'Equity', component: AsyncPolicy},
+  {path: '/about', name: 'About', component: AsyncAboutUs},
+  {path: '/start-campaign', name: 'Start Campaign', component: AsyncStartCamapign},
   {path: '/contact', name: 'Contact', component: AsyncContact},
   {path: '/faq', name: 'Contact', component: AsyncFAQ},
   {path: '/timer', name: 'Timer', component: Timer},

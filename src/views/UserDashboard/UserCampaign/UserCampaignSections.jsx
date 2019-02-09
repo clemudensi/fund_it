@@ -19,7 +19,6 @@ class UserCampaignSection extends React.Component{
   render(){
     const { id } = this.props;
     const padTop = {paddingTop: 30};
-    // console.log(this.campaignId(), 'UCS')
     return (
       <div style={padTop}>
         <NavPills

@@ -98,7 +98,7 @@ class Singup extends React.Component {
     const res = await this.Auth.signup(firstName, lastName, email, password, terms_condition);
     if( res.data.token){
       const user_id = res.data._id;
-      axios.post(`${PATH_BASE}/api/v1/user-info/new`, { user_id} );
+      await axios.post(`${PATH_BASE}/api/v1/user-info/new`, { user_id} );
       window.location.replace(`/user/${res.data._id}/dashboard`);
     }
   };

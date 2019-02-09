@@ -17,16 +17,16 @@ const style = {
   }
 };
 
-function CardExampleImageCaps(props) {
+function Policy(props) {
   const { classes } = props;
   return (
     <div>
       <Card>
-        <img
-          className={classes.imgCardTop}
-          src="https://images.unsplash.com/photo-1517303650219-83c8b1788c4c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bd4c162d27ea317ff8c67255e955e3c8&auto=format&fit=crop&w=2691&q=80"
-          alt="Card-img-cap"
-        />
+        {/*<img*/}
+          {/*className={classes.imgCardTop}*/}
+          {/*src="https://images.unsplash.com/photo-1517303650219-83c8b1788c4c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bd4c162d27ea317ff8c67255e955e3c8&auto=format&fit=crop&w=2691&q=80"*/}
+          {/*alt="Card-img-cap"*/}
+        {/*/>*/}
         <CardBody>
           <h4 className={classes.cardTitle}>Card title</h4>
           <p>
@@ -65,4 +65,4 @@ function CardExampleImageCaps(props) {
   );
 }
 
-export default withStyles(style)(CardExampleImageCaps);
+export default withStyles(style)(Policy);

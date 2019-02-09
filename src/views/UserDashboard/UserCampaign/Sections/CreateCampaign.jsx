@@ -198,6 +198,7 @@ class CreateCampaign extends React.Component {
         if(res.data.success === true) {
           const campaign_id = res.data.campaign._id;
           const user_id = this.props.user_info_id;
+          console.log(campaign_id, user_id, 'campaign and user')
           await axios.patch(`${PATH_BASE}/api/v1/user/${user_id}/add-campaign`, {campaign_id });
           this.notify();
           window.location.reload();
@@ -234,7 +235,6 @@ class CreateCampaign extends React.Component {
   render() {
     const buttonFloat = {float: 'right'};
     const { classes} = this.props;
-    // console.log(this.props.user_info_id, 'user info ID')
     // console.log(this.state.create_campaign, 'created campaign')
     const {
       campaign_title,

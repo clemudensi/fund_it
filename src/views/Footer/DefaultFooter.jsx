@@ -10,6 +10,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 // @material-ui icons
 import styles from "assets/jss/material-kit-pro-react/views/ecommerceStyle.jsx";
+import NavLink from "react-router-dom/es/NavLink";
 
 class DefaultFooter extends React.Component {
   componentDidMount() {
@@ -57,6 +58,30 @@ class DefaultFooter extends React.Component {
                       className={classes.block}
                     >
                       Contact us
+                    </a>
+                  </ListItem>
+                  <ListItem className={classes.inlineBlock}>
+                    <a
+                      href="/resources/center"
+                      className={classes.block}
+                    >
+                      Resource Center
+                    </a>
+                  </ListItem>
+                  <ListItem className={classes.inlineBlock}>
+                    <a
+                      href="/about"
+                      className={classes.block}
+                    >
+                      About Us
+                    </a>
+                  </ListItem>
+                  <ListItem className={classes.inlineBlock}>
+                    <a
+                      href="/start-campaign"
+                      className={classes.block}
+                    >
+                      Start A Campaign
                     </a>
                   </ListItem>
                 </List>
@@ -115,6 +140,10 @@ class DefaultFooter extends React.Component {
                 </div>
                 <div>
                   <p>Send us an email at <span><strong>support@fundit.com</strong></span></p>
+                  <div/>
+                  <p><NavLink to={`/resources/fees`}><span><strong>Fees</strong></span></NavLink></p>
+                  <divergence/>
+                  <p><NavLink to={`/resources/how-it-works`}><span><strong>How it Works</strong></span></NavLink></p>
                 </div>
               </div>
             </GridItem>

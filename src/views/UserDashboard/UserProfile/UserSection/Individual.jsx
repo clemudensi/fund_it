@@ -123,7 +123,7 @@ class Individual extends React.Component{
           user_type: '',
           occupation: '',
           phone: '',
-          profile_image: ''})
+          profile_image: ''});
         window.location.reload();
       }
     } catch (err) {

@@ -97,7 +97,7 @@ class Accordion extends React.Component {
 
 Accordion.defaultProps = {
   active: -1,
-  activeColor: "primary"
+  activeColor: "info"
 };
 
 Accordion.propTypes = {

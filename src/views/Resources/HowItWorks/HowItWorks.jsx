@@ -2,9 +2,9 @@ import React from "react";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // @material-ui/icons
-import Chat from "@material-ui/icons/Chat";
+import Chat from "@material-ui/icons/VoiceChat";
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
-import Fingerprint from "@material-ui/icons/Fingerprint";
+import Shop from "@material-ui/icons/Shop";
 import AttachMoney from "@material-ui/icons/AttachMoney";
 // core components
 import GridContainer from "../../../components/Grid/GridContainer.jsx";
@@ -46,8 +46,8 @@ function HowItWorks({ ...props }) {
                 icon={Chat}
                 title="Raise funds with a crowdfunding campaign"
                 description="
-Acquire starter capital and validate your idea by tapping into Indiegogo’s global network of early adopters."
-                iconColor="info"
+Acquire starter capital and validate your idea by tapping into FundIt’s global network of early adopters."
+                iconColor="success"
               />
             </GridItem>
             {/*<GridItem xs={12} sm={3} md={3}>*/}
@@ -63,11 +63,11 @@ Acquire starter capital and validate your idea by tapping into Indiegogo’s glo
             <GridItem xs={12} sm={4} md={4}>
               <InfoArea
                 vertical
-                icon={Fingerprint}
-                title="Generate early sales in the Indiegogo Marketplace"
+                icon={Shop}
+                title="Generate early sales in the FundIt Marketplace"
                 description="
 Sell your product directly to our audience of tech consumers – we even have the partners to provide fulfillment tools."
-                iconColor="danger"
+                iconColor="success"
               />
             </GridItem>
             <GridItem xs={12} sm={4} md={4}>
@@ -77,9 +77,9 @@ Sell your product directly to our audience of tech consumers – we even have th
                 title="Raise investment from the crowd or conduct ICOst"
                 description="
 Let the crowd invest in your company along with (or instead of) traditional investors. Offer securities, revenue sharing, or even cryptocurrency and token sales."
-                iconColor="danger"
+                iconColor="success"
               />
-              <Link to={`/apply-for-equity`}>Apply for  Equity</Link>
+              <Link to={`/resources/apply-for-equity`}>Apply for Equity</Link>
             </GridItem>
           </GridContainer>
         </div>

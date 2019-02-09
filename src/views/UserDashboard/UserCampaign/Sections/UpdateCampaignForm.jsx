@@ -131,21 +131,15 @@ class UpdateCampaignForm extends React.Component {
     this.setState({ campaign_type: e.target.value });
   };
 
-  deleteFundItem (key) {
-    const amount = this.state.campaign_funds[key].amount;
-    remove(this.state.campaign_funds, fund => fund.amount === amount);
-    this.setState((prevState) => ({ campaign_funds: prevState.campaign_funds }))
-  };
-
   deleteFundItemEdit (key) {
     const amount = this.props.campaign.campaign_funds[key].amount;
     remove(this.props.campaign.campaign_funds, fund => fund.amount === amount);
     this.setState((prevState) => ({ campaign_funds: prevState.campaign_funds }))
   };
 
-  deleteFundType (key) {
-    const type = this.state.campaign_funds[key].type;
-    remove(this.state.campaign_funds, fund => fund.type === type);
+  deleteFundTypeEdit (key) {
+    const type = this.props.campaign.campaign_funds[key].type;
+    remove(this.props.campaign.campaign_funds, fund => fund.type === type);
     this.setState((prevState) => ({ campaign_funds: prevState.campaign_funds }))
   };
 
@@ -214,6 +208,7 @@ class UpdateCampaignForm extends React.Component {
   };
 
   render() {
+    console.log(this.state.campaign_funds, this.props.campaign, 'CF')
     const campaign_funds = this.props.campaign.campaign_funds.map( funds => funds);
     const buttonFloat = {float: 'right'};
     const { classes} = this.props;
@@ -336,18 +331,6 @@ class UpdateCampaignForm extends React.Component {
                                               </Button></span></p>
 
                                           </div> : null)}
-                                          {map(this.state.campaign_funds, (funding, key) => funding.amount ? <div key={key} align="center">
-                                              <p>{funding.amount} {funding.purpose} <span><Button
-                                                simple justIcon size="sm"
-                                                color="danger"
-                                                onClick={() => this.deleteFundItem(key)}
-                                                style={{textAlign: 'right', marginTop: 2}}
-                                              >
-                                                <Close color='error'/>
-                                              </Button></span></p>
-
-                                            </div> : null
-                                          )}
                                         </div>
                                       </GridItem>
 
@@ -400,19 +383,7 @@ class UpdateCampaignForm extends React.Component {
                                               <p>{funding.type} {funding.description} <span><Button
                                                 simple justIcon size="sm"
                                                 color="danger"
-                                                onClick={() => this.deleteFundType(key)}
-                                                className={classes.floatRight}
-                                                style={{textAlign: 'right', marginTop: 2}}
-                                              >
-                                                <Close />
-                                              </Button></span></p>
-                                            </div> : null
-                                          )}
-                                          {map(this.state.campaign_funds, (funding, key) => funding.type ? <div key={key} align="center">
-                                              <p>{funding.type} {funding.description} <span><Button
-                                                simple justIcon size="sm"
-                                                color="danger"
-                                                onClick={() => this.deleteFundType(key)}
+                                                onClick={() => this.deleteFundTypeEdit(key)}
                                                 className={classes.floatRight}
                                                 style={{textAlign: 'right', marginTop: 2}}
                                               >

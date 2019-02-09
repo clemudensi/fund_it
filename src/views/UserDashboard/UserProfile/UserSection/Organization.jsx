@@ -241,10 +241,10 @@ class Organization extends React.Component{
                 </Grid>
               </CardBody>
               <CardFooter>
-                <Button color="rose" round onClick={this.props.cancelEdit} justify="right">
+                <Button color="info" round onClick={this.props.cancelEdit} size="sm" justify="right">
                   Cancel
                 </Button>
-                <Button color="info" round >Update Profile</Button>
+                <Button color="info" round size="sm">Update Profile</Button>
               </CardFooter>
             </Card>
           </GridItem>

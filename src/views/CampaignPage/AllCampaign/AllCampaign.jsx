@@ -90,11 +90,12 @@ class Campaigns extends React.Component {
     const { classes, all_campaign, user_id } = this.props;
     return(
       map(all_campaign, (campaign, key) => {
-        let foundCampaign = campaign.campaign_followers.includes(user_id)
+        let foundCampaign = campaign.campaign_followers.includes(user_id);
           const color = foundCampaign ? "error" : "disabled";
 
         return (
-          <GridItem md={4} sm={4} className={`${classes.mlAuto} ${classes.mrAuto} ${
+          campaign.campaign_status === true ?
+            <GridItem md={4} sm={4} className={`${classes.mlAuto} ${classes.mrAuto} ${
             classes.textCenter
             }`} key={key}>
             <Card blog>
@@ -140,7 +141,7 @@ class Campaigns extends React.Component {
                 />
               </div>
             </Card>
-          </GridItem>
+          </GridItem> : null
         )
       })
     )
