@@ -24,7 +24,6 @@ class FundedCampaign extends React.Component {
   render() {
     const { classes, user_funded, ...rest } = this.props;
     //loop through user_info to add funded campaign details to designated place holders
-    console.log(user_funded, 'UI FC')
     return (
       <div {...rest} className="cd-section" id="contentAreas">
         {/*<h2>Funded Campaign</h2>*/}

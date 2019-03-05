@@ -101,6 +101,9 @@ class Singup extends React.Component {
       await axios.post(`${PATH_BASE}/api/v1/user-info/new`, { user_id} );
       window.location.replace(`/user/${res.data._id}/dashboard`);
     }
+    this.setState({
+      err: res.data.msg
+    })
   };
 
   confirmPassword = () => {
@@ -139,6 +142,7 @@ class Singup extends React.Component {
           aria-describedby="signup-modal-slide-description"
         >
           <Card plain className={classes.modalSignupCard}>
+            {this.state.err ? <div style={{ color: '#FF0000', padding: '30px', textAlign: 'center'}}>{this.state.err}</div> : null}
             <DialogTitle
               id="signup-modal-slide-title"
               disableTypography

@@ -57,18 +57,20 @@ class ShowAllUserCampaign extends React.Component{
   async deleteCampaign(campaign_id){
     const {user_id} = this.props;
     try {
-      const res = await axios.delete(
-        `${PATH_BASE}/api/v1/campaign/${ campaign_id }`, {user_id}
-      );
-      console.log(res.data);
-      if(res.data.success === true) window.location.reload();
-        } catch (err) {
+      if (window.confirm("Delete Campaign ?" )) {
+        const res = await axios.delete(
+          `${PATH_BASE}/api/v1/campaign/${ campaign_id }`, {user_id}
+        );
+        if(res.data.success === true) window.location.reload();
+      }
+      return false;
+    } catch (err) {
       return err
     }
   }
 
   render(){
-    console.log(user_campaign, 'User campaign')
+    // console.log(user_campaign, 'User campaign')
     const { classes, user_campaign } = this.props;
     // console.log(this.props.user_id, 'USer ID')
     return (

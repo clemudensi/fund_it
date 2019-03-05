@@ -61,8 +61,15 @@ class Login extends React.Component {
     e.preventDefault();
     const {email, password} = this.state;
     const res = await this.Auth.login(email, password);
-    window.location.replace(`/user/${res.data._id}/dashboard`);
-    this.setState({id: res.data._id})
+    if(res.data.success === true) {
+      window.location.replace(`/user/${res.data._id}/dashboard`);
+      this.setState({
+        id: res.data._id,
+      })
+    }
+    this.setState({
+      err: res.data.msg
+    })
   };
 
   render() {
@@ -70,6 +77,7 @@ class Login extends React.Component {
     const { classes } = this.props;
     return (
       <div>
+
         <Button
           onClick={() => this.handleClickOpen("loginModal")}
           color={window.innerWidth < 960 ? "transparent":"transparent"}
@@ -91,6 +99,7 @@ class Login extends React.Component {
           aria-describedby="login-modal-slide-description"
         >
           <Card plain className={classes.modalLoginCard}>
+            {this.state.err ? <div style={{ color: '#FF0000', padding: '30px', textAlign: 'center'}}>{this.state.err}</div> : null}
             <DialogTitle
               id="login-modal-slide-title"
               disableTypography

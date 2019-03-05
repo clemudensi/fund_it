@@ -76,6 +76,12 @@ class CreateCampaign extends React.Component {
     this.setState({campaign_duration: e.target.value});
   };
 
+  handleDurationError = () => {
+    if(this.state.campaign_duration > 45) {
+      this.setState({campaign_duration_error: "Campaign days should not exceed 45"});
+    }
+  };
+
   handleFundAmount = e => {
     this.setState({fund_amount: e.target.value});
   };
@@ -183,7 +189,7 @@ class CreateCampaign extends React.Component {
         campaign_image,
         campaign_funds,
       } = this.state;
-
+      console.log(" i was fired here 1")
       try {
         const res = await axios.post(`${PATH_BASE}/api/v1/campaign/new`, {
           campaignOwner_id,
@@ -194,6 +200,7 @@ class CreateCampaign extends React.Component {
           campaign_image,
           campaign_funds
         });
+        console.log(res, " i was fired here 2")
         this.setState({ create_campaign: res.data});
         if(res.data.success === true) {
           const campaign_id = res.data.campaign._id;
@@ -267,7 +274,7 @@ class CreateCampaign extends React.Component {
                   avatar={placeholder}
                   body={
                     <div>
-
+                      {this.state.campaign_duration > 45 ? <p style={{ color: '#FF0000'}}>{this.state.campaign_duration_error}</p> : null}
                       {/*Campaign Title*/}
                       <GridContainer>
                         <GridItem xs={12} sm={6} md={6}>
@@ -284,7 +291,6 @@ class CreateCampaign extends React.Component {
                           />
 
                         </GridItem>
-
                         {/*Campaign Duration*/}
                         <GridItem xs={12} sm={6} md={6}>
                           <TextField
@@ -293,6 +299,7 @@ class CreateCampaign extends React.Component {
                             value={campaign_duration}
                             label="Campaign Duration"
                             onChange={this.handleChange('campaign_duration')}
+                            onBlur={this.handleDurationError}
                             placeholder="Duration in days (0 - 45 )"
                             type="number"
                             InputProps={{ inputProps: { min: 0, max: 45 } }}

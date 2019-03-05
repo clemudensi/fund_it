@@ -6,15 +6,20 @@ export default class LocalAuthService {
 
     login = async (email, password)  => {
         const res = await axios.post(`${PATH_BASE}/api/v1/login`, {
-            email, password })
+            email, password });
         localStorage.setItem('id_token', res.headers['x-auth-token']);
         return Promise.resolve(res);
+        // return new Promise((resolve => {
+        //   resolve(res);
+        //   console.log(resolve(res))
+        // }))
     };
 
     async signup(firstName, lastName, email, password, terms_condition){
         const res = await axios.post(`${PATH_BASE}/api/v1/signup`,{
             firstName, lastName, email, password, terms_condition
         });
+        console.log(res, 'promise')
         localStorage.setItem('id_token', res.headers['x-auth-token']);
         return Promise.resolve(res);
     }
